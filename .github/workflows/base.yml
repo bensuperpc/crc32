@@ -120,7 +120,7 @@ jobs:
       - name: Configure
         run: cmake --preset=ci-${{ matrix.os }}
           -D BUILD_SHARED_LIBS=${{ matrix.shared }}
-          -DCMAKE_CXX_FLAGS='${CMAKE_CXX_FLAGS} -D__BYTE_ORDER=1234'
+          -D CMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -D__BYTE_ORDER=1234"
 
       - name: Build
         run: cmake --build build --config Release -j 2
