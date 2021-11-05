@@ -57,4 +57,4 @@ else()
 endif()
 
 
-windows_set_path(crc32_test crc32::crc32)
+# windows_set_path(crc32_test crc32::crc32)
