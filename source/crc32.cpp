@@ -44,7 +44,7 @@ uint32_t crc32::crc32_bitwise(const void* data,
   return ~crc;  // same as crc ^ 0xFFFFFFFF
 }
 
-/// compute CRC32 (half-byte algoritm)
+/// compute CRC32 (half-byte algorithm)
 uint32_t crc32::crc32_halfbyte(const void* data,
                                size_t length,
                                uint32_t previousCrc32)
@@ -463,7 +463,7 @@ uint32_t crc32::crc32_combine(uint32_t crcA, uint32_t crcB, size_t lengthB)
   // AAAA000)
   //   and   prepend length(A) zeros to B and call it B' (think of it as
   //   0000BBB) then exists a C' = A' ^ B'
-  // - remember: if you XOR someting with zero, it remains unchanged: X ^ 0 = X
+  // - remember: if you XOR something with zero, it remains unchanged: X ^ 0 = X
   // - that means C' = A concat B so that crc(A concat B) = crc(C') = crc(A') ^
   // crc(B')
   // - the trick is to compute crc(A') based on crc(A)
