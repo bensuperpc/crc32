@@ -57,7 +57,7 @@ target_include_directories(
     "$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/export>"
 )
 
-target_compile_features(crc32_crc32 PUBLIC cxx_std_17)
+# target_compile_features(crc32_crc32 PUBLIC cxx_std_17)
 
 # ---- Install rules ----
 
