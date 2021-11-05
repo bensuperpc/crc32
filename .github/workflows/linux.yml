@@ -17,6 +17,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        library:
+          - { shared: YES }
+          - { shared: NO }
         builder:
           - {
               cxx: g++-4.8,
@@ -266,8 +269,9 @@ jobs:
           CXX: ${{matrix.cxx}}
           CXXFLAGS: ${{matrix.cxxflags}}
         run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=${{matrix.builder.build_type}} \
-                -DCMAKE_CXX_STANDARD=${{matrix.builder.std}} -G Ninja --preset=ci-coverage
+          cmake -S . -B build -D CMAKE_BUILD_TYPE=${{matrix.builder.build_type}} \
+                -D CMAKE_CXX_STANDARD=${{matrix.builder.std}} -G Ninja --preset=ci-coverage \
+                -D BUILD_SHARED_LIBS=${{ matrix.library.shared }}
 
       - name: Build
         run: ninja -C build

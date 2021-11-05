@@ -72,7 +72,9 @@
 
 // abort if byte order is undefined
 #if !defined(__BYTE_ORDER)
-#  error undefined byte order, compile with -D__BYTE_ORDER=1234 (if little endian) or -D__BYTE_ORDER=4321 (big endian)
+#  warning undefined byte order, compile with -D__BYTE_ORDER=1234 (if little endian) or -D__BYTE_ORDER=4321 (big endian)
+#  warning use default value: __BYTE_ORDER=1234 (little endian)
+#  define __BYTE_ORDER = 1234
 #endif
 
 /// zlib's CRC32 polynomial
