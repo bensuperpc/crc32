@@ -24,7 +24,7 @@ uint32_t crc32::crc32_bitwise(const void* data,
                               uint32_t previousCrc32)
 {
   uint32_t crc = ~previousCrc32;  // same as previousCrc32 ^ 0xFFFFFFFF
-  const uint8_t* current = (const uint8_t*)data;
+  const uint8_t* current = reinterpret_cast<const uint8_t*>(data);
 
   while (length-- != 0) {
     crc ^= *current++;
@@ -50,7 +50,7 @@ uint32_t crc32::crc32_halfbyte(const void* data,
                                uint32_t previousCrc32)
 {
   uint32_t crc = ~previousCrc32;  // same as previousCrc32 ^ 0xFFFFFFFF
-  const uint8_t* current = (const uint8_t*)data;
+  const uint8_t* current = reinterpret_cast<const uint8_t*>(data);
 
   /// look-up table for half-byte, same as crc32Lookup[0][16*i]
   static const uint32_t _Crc32Lookup16[16] = {0x00000000,
@@ -86,7 +86,7 @@ uint32_t crc32::crc32_1byte(const void* data,
                             uint32_t previousCrc32)
 {
   uint32_t crc = ~previousCrc32;  // same as previousCrc32 ^ 0xFFFFFFFF
-  const uint8_t* current = (const uint8_t*)data;
+  const uint8_t* current = reinterpret_cast<const uint8_t*>(data);
 
   while (length-- != 0)
     crc = (crc >> 8) ^ Crc32Lookup[0][(crc & 0xFF) ^ *current++];
@@ -101,7 +101,7 @@ uint32_t crc32::crc32_1byte_tableless(const void* data,
                                       uint32_t previousCrc32)
 {
   uint32_t crc = ~previousCrc32;  // same as previousCrc32 ^ 0xFFFFFFFF
-  const uint8_t* current = (const uint8_t*)data;
+  const uint8_t* current = reinterpret_cast<const uint8_t*>(data);
 
   while (length-- != 0) {
     uint8_t s = uint8_t(crc) ^ *current++;
@@ -152,7 +152,7 @@ uint32_t crc32::crc32_1byte_tableless2(const void* data,
 {
   int32_t crc = ~previousCrc32;  // note: signed integer, right shift
                                  // distributes sign bit into lower bits
-  const uint8_t* current = (const uint8_t*)data;
+  const uint8_t* current = reinterpret_cast<const uint8_t*>(data);
 
   while (length-- != 0) {
     crc = crc ^ *current++;
@@ -166,7 +166,7 @@ uint32_t crc32::crc32_1byte_tableless2(const void* data,
         ^ (((crc << 25) >> 31) & (Polynomial >> 1))
         ^ (((crc << 24) >> 31) & Polynomial);
 
-    crc = ((uint32_t)crc >> 8)
+    crc = (static_cast<uint32_t>(crc) >> 8)
         ^ c;  // convert to unsigned integer before right shift
   }
 
@@ -180,7 +180,7 @@ uint32_t crc32::crc32_4bytes(const void* data,
                              uint32_t previousCrc32)
 {
   uint32_t crc = ~previousCrc32;  // same as previousCrc32 ^ 0xFFFFFFFF
-  const uint32_t* current = (const uint32_t*)data;
+  const uint32_t* current = reinterpret_cast<const uint32_t*>(data);
 
   // process four bytes at once (Slicing-by-4)
   while (length >= 4) {
@@ -199,7 +199,7 @@ uint32_t crc32::crc32_4bytes(const void* data,
     length -= 4;
   }
 
-  const uint8_t* currentChar = (const uint8_t*)current;
+  const uint8_t* currentChar = reinterpret_cast<const uint8_t*>(current);
   // remaining 1 to 3 bytes (standard algorithm)
   while (length-- != 0)
     crc = (crc >> 8) ^ Crc32Lookup[0][(crc & 0xFF) ^ *currentChar++];
@@ -215,7 +215,7 @@ uint32_t crc32::crc32_8bytes(const void* data,
                              uint32_t previousCrc32)
 {
   uint32_t crc = ~previousCrc32;  // same as previousCrc32 ^ 0xFFFFFFFF
-  const uint32_t* current = (const uint32_t*)data;
+  const uint32_t* current = reinterpret_cast<const uint32_t*>(data);
 
   // process eight bytes at once (Slicing-by-8)
   while (length >= 8) {
@@ -240,7 +240,7 @@ uint32_t crc32::crc32_8bytes(const void* data,
     length -= 8;
   }
 
-  const uint8_t* currentChar = (const uint8_t*)current;
+  const uint8_t* currentChar = reinterpret_cast<const uint8_t*>(current);
   // remaining 1 to 7 bytes (standard algorithm)
   while (length-- != 0)
     crc = (crc >> 8) ^ Crc32Lookup[0][(crc & 0xFF) ^ *currentChar++];
@@ -254,7 +254,7 @@ uint32_t crc32::crc32_4x8bytes(const void* data,
                                uint32_t previousCrc32)
 {
   uint32_t crc = ~previousCrc32;  // same as previousCrc32 ^ 0xFFFFFFFF
-  const uint32_t* current = (const uint32_t*)data;
+  const uint32_t* current = reinterpret_cast<const uint32_t*>(data);
 
   // enabling optimization (at least -O2) automatically unrolls the inner
   // for-loop
@@ -288,7 +288,7 @@ uint32_t crc32::crc32_4x8bytes(const void* data,
     length -= BytesAtOnce;
   }
 
-  const uint8_t* currentChar = (const uint8_t*)current;
+  const uint8_t* currentChar = reinterpret_cast<const uint8_t*>(current);
   // remaining 1 to 31 bytes (standard algorithm)
   while (length-- != 0)
     crc = (crc >> 8) ^ Crc32Lookup[0][(crc & 0xFF) ^ *currentChar++];
@@ -304,7 +304,7 @@ uint32_t crc32::crc32_16bytes(const void* data,
                               uint32_t previousCrc32)
 {
   uint32_t crc = ~previousCrc32;  // same as previousCrc32 ^ 0xFFFFFFFF
-  const uint32_t* current = (const uint32_t*)data;
+  const uint32_t* current = reinterpret_cast<const uint32_t*>(data);
 
   // enabling optimization (at least -O2) automatically unrolls the inner
   // for-loop
@@ -353,7 +353,7 @@ uint32_t crc32::crc32_16bytes(const void* data,
     length -= BytesAtOnce;
   }
 
-  const uint8_t* currentChar = (const uint8_t*)current;
+  const uint8_t* currentChar = reinterpret_cast<const uint8_t*>(current);
   // remaining 1 to 63 bytes (standard algorithm)
   while (length-- != 0)
     crc = (crc >> 8) ^ Crc32Lookup[0][(crc & 0xFF) ^ *currentChar++];
@@ -371,14 +371,14 @@ uint32_t crc32::crc32_16bytes_prefetch(const void* data,
   // prefetching 256 bytes look-ahead seems to be the sweet spot on Core i7 CPUs
 
   uint32_t crc = ~previousCrc32;  // same as previousCrc32 ^ 0xFFFFFFFF
-  const uint32_t* current = (const uint32_t*)data;
+  const uint32_t* current = reinterpret_cast<const uint32_t*>(data);
 
   // enabling optimization (at least -O2) automatically unrolls the for-loop
   const size_t Unroll = 4;
   const size_t BytesAtOnce = 16 * Unroll;
 
   while (length >= BytesAtOnce + prefetchAhead) {
-    PREFETCH(((const char*)current) + prefetchAhead);
+    PREFETCH((reinterpret_cast<const char*>(current)) + prefetchAhead);
 
     for (size_t unrolling = 0; unrolling < Unroll; unrolling++) {
 #  if __BYTE_ORDER == __BIG_ENDIAN
@@ -421,7 +421,7 @@ uint32_t crc32::crc32_16bytes_prefetch(const void* data,
     length -= BytesAtOnce;
   }
 
-  const uint8_t* currentChar = (const uint8_t*)current;
+  const uint8_t* currentChar = reinterpret_cast<const uint8_t*>(current);
   // remaining 1 to 63 bytes (standard algorithm)
   while (length-- != 0)
     crc = (crc >> 8) ^ Crc32Lookup[0][(crc & 0xFF) ^ *currentChar++];
@@ -499,12 +499,12 @@ uint32_t crc32::crc32_combine(uint32_t crcA, uint32_t crcB, size_t lengthB)
 
   // put operator for one zero bit in odd
   odd[0] = Polynomial;  // CRC-32 polynomial
-  for (int i = 1; i < (int)CrcBits; i++)
+  for (int i = 1; i < static_cast<int>(CrcBits); i++)
     odd[i] = 1 << (i - 1);
 
   // put operator for two zero bits in even
   // same as gf2_matrix_square(even, odd);
-  for (int i = 0; i < (int)CrcBits; i++) {
+  for (int i = 0; i < static_cast<int>(CrcBits); i++) {
     uint32_t vec = odd[i];
     even[i] = 0;
     for (int j = 0; vec != 0; j++, vec >>= 1)
@@ -513,7 +513,7 @@ uint32_t crc32::crc32_combine(uint32_t crcA, uint32_t crcB, size_t lengthB)
   }
   // put operator for four zero bits in odd
   // same as gf2_matrix_square(odd, even);
-  for (int i = 0; i < (int)CrcBits; i++) {
+  for (int i = 0; i < static_cast<int>(CrcBits); i++) {
     uint32_t vec = even[i];
     odd[i] = 0;
     for (int j = 0; vec != 0; j++, vec >>= 1)
@@ -527,7 +527,7 @@ uint32_t crc32::crc32_combine(uint32_t crcA, uint32_t crcB, size_t lengthB)
   // apply secondLength zeros to firstCrc32
   for (; lengthB > 0; lengthB >>= 1) {
     // same as gf2_matrix_square(a, b);
-    for (int i = 0; i < (int)CrcBits; i++) {
+    for (int i = 0; i < static_cast<int>(CrcBits); i++) {
       uint32_t vec = b[i];
       a[i] = 0;
       for (int j = 0; vec != 0; j++, vec >>= 1)
