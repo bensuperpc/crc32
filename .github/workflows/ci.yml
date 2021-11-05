@@ -95,7 +95,7 @@ jobs:
       run: ctest --output-on-failure -j 2
 
   test:
-    needs: [lint]
+#    needs: [lint]
 
     strategy:
       matrix:
