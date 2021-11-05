@@ -98,9 +98,8 @@ jobs:
     #    needs: [lint]
 
     strategy:
+      fail-fast: false
       matrix:
-        fail-fast: false
-
         os: [macos, ubuntu, windows]
 
         type: [shared, static]
@@ -121,7 +120,7 @@ jobs:
       - name: Configure
         run: cmake --preset=ci-${{ matrix.os }}
           -D BUILD_SHARED_LIBS=${{ matrix.shared }}
-          -D__BYTE_ORDER=1234
+          -D__BYTE_ORDER=1234 
 
       - name: Build
         run: cmake --build build --config Release -j 2
