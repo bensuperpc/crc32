@@ -1,0 +1,42 @@
+name: windows
+
+on:
+  push:
+    branches:
+      - "*"
+    paths-ignore:
+      - "**.md"
+  pull_request:
+    branches:
+      - "*"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shared: [YES, NO]
+        standard: [11, 14, 17, 20]
+        platform: [Win32, x64]
+        build_type: [Debug, Release]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create Build Environment
+        run: cmake -E make_directory ${{runner.workspace}}/build
+
+      - name: Configure
+        run: cmake -S . -B build -D CMAKE_BUILD_TYPE=${{matrix.build_type}} -A ${{matrix.platform}} -D CMAKE_CXX_STANDARD=${{matrix.standard}} -D BUILD_SHARED_LIBS=${{matrix.shared}}
+
+      - name: Build
+        run: |
+          $threads = (Get-CimInstance Win32_ComputerSystem).NumberOfLogicalProcessors
+          cmake --build build --parallel $threads
+
+      - name: Test
+        working-directory: build
+        run: ctest --output-on-failure -j 2
+        env:
+          CTEST_OUTPUT_ON_FAILURE: True
