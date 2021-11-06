@@ -104,12 +104,6 @@ const size_t MaxSlice = 1;
 #  define NO_LUT  // don't need Crc32Lookup at all
 #endif
 
-#ifndef NO_LUT
-/// forward declaration, table is at the end of this file
-extern const uint32_t
-    Crc32Lookup[MaxSlice][256];  // extern is needed to keep compiler happy
-#endif
-
 namespace crc32
 {
 // crc32_fast selects the fastest algorithm depending on flags

@@ -34,7 +34,4 @@ See the [CONTRIBUTING](CONTRIBUTING.md) document.
 
 # Licensing
 
-<!--
-Please go to https://choosealicense.com/ and choose a license that fits your
-needs. GNU GPLv3 is a pretty nice option ;-)
--->
+See the [LICENSE](LICENSE) document.
