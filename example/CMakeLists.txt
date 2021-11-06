@@ -20,3 +20,4 @@ function(add_example NAME)
 endfunction()
 
 add_example(test_example)
+add_example(simple_example)

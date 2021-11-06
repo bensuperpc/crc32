@@ -1,6 +1,6 @@
 // //////////////////////////////////////////////////////////
-// Crc32Test.cpp
-// Copyright (c) 2016-2019 Stephan Brumme. All rights reserved.
+// test_example.cpp
+// Copyright (c) 2016-2021 Stephan Brumme. All rights reserved.
 // see http://create.stephan-brumme.com/disclaimer.html
 //
 
@@ -10,7 +10,7 @@
 #include "crc32/crc32.hpp"
 
 // the slicing-by-4/8/16 tests are only performed if the corresponding
-// preprocessor symbol is defined in Crc32.h
+// preprocessor symbol is defined in crc32.hpp
 // simpler algorithms can be enabled/disabled right here:
 #define CRC32_TEST_BITWISE
 #define CRC32_TEST_HALFBYTE
@@ -45,7 +45,7 @@ static double seconds()
 #endif
 }
 
-int main(int, char**)
+auto main(int argc, char* argv[]) -> int
 {
   printf("Please wait ...\n");
 

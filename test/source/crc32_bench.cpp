@@ -1,3 +1,10 @@
+// //////////////////////////////////////////////////////////
+// crc32_bench.cpp
+// Copyright (c) 2011-2021 Stephan Brumme. All rights reserved.
+// Google benchmark contributed by Bensuperpc
+// see http://create.stephan-brumme.com/disclaimer.html
+//
+
 #include <cstdint>
 #include <random>
 #include <string>

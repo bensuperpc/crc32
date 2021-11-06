@@ -1,6 +1,6 @@
 // //////////////////////////////////////////////////////////
-// Crc32.cpp
-// Copyright (c) 2011-2019 Stephan Brumme. All rights reserved.
+// crc32.cpp
+// Copyright (c) 2011-2021 Stephan Brumme. All rights reserved.
 // Slicing-by-16 contributed by Bulat Ziganshin
 // Tableless bytewise CRC contributed by Hagai Gold
 // see http://create.stephan-brumme.com/disclaimer.html

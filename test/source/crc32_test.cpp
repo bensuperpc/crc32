@@ -1,3 +1,10 @@
+// //////////////////////////////////////////////////////////
+// crc32_test.cpp
+// Copyright (c) 2011-2021 Stephan Brumme. All rights reserved.
+// Google test contributed by Bensuperpc
+// see http://create.stephan-brumme.com/disclaimer.html
+//
+
 #include <string>
 
 #include "crc32/crc32.hpp"
