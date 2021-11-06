@@ -38,7 +38,7 @@ jobs:
         run: |
           cmake -S . -B build -D CMAKE_BUILD_TYPE=${{matrix.build_type}} \
                 -D CMAKE_CXX_STANDARD=${{matrix.standard}} -G Ninja \
-                -D BUILD_SHARED_LIBS=${{matrix.shared}} --preset=ci-ubuntu
+                -D BUILD_SHARED_LIBS=${{matrix.shared}} --preset=ci-coverage
 
       - name: Build
         run: ninja -C build
