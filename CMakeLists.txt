@@ -46,7 +46,7 @@ set_target_properties(
 )
 
 target_include_directories(
-    crc32_crc32 ${crc32_warning_guard}
+    crc32_crc32 ${warning_guard}
     PUBLIC
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>"
 )
