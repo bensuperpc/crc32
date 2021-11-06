@@ -76,8 +76,7 @@
 #  if _MSC_VER && !__INTEL_COMPILER
 #    pragma message( \
         "undefined byte order, compile with -D__BYTE_ORDER=1234 (if little endian) or -D__BYTE_ORDER=4321 (big endian)")
-#    pragma message( \
-        "use default byte order: little endian (x86 and ARM CPUs)")
+#    pragma message("use default byte order: little endian (x86 and ARM CPUs)")
 #  else
 #    warning undefined byte order, compile with -D__BYTE_ORDER=1234 (if little endian) or -D__BYTE_ORDER=4321 (big endian)
 #    warning use default byte order: little endian (x86 and ARM CPUs)
