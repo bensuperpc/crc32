@@ -67,13 +67,6 @@ Full example with Ubuntu (Linux):
   },
   "configurePresets": [
     {
-      "name": "folders",
-      "hidden": true,
-      "cacheVariables": {
-        "CMAKE_PROJECT_INCLUDE": "${sourceDir}/project-include-after.cmake"
-      }
-    },
-    {
       "name": "static-analyzers",
       "hidden": true,
       "inherits": ["clang-tidy", "cppcheck"]
@@ -81,7 +74,7 @@ Full example with Ubuntu (Linux):
     {
       "name": "dev-common",
       "hidden": true,
-      "inherits": ["folders", "static-analyzers", "dev-mode"],
+      "inherits": ["static-analyzers", "dev-mode"],
       "cacheVariables": {
         "BUILD_MCSS_DOCS": "ON"
       }
@@ -104,7 +97,7 @@ Full example with Ubuntu (Linux):
     {
       "name": "dev-coverage",
       "binaryDir": "${sourceDir}/build/coverage",
-      "inherits": ["folders", "dev-mode", "coverage-unix"]
+      "inherits": ["dev-mode", "coverage-unix"]
     }
   ]
 }

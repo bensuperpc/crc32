@@ -60,5 +60,4 @@ else()
   message(WARNING "Disable tests, only tested on Linux x86_64")
 endif()
 
-
 # windows_set_path(crc32_test crc32::crc32)
