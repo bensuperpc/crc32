@@ -44,11 +44,7 @@ static void crc32_fast(benchmark::State& state)
   // state.SetLabel("OK");
 }
 // Register the function as a benchmark
-BENCHMARK(crc32_fast)->Arg(10);  // 10 o
-BENCHMARK(crc32_fast)->Arg(100);  // 0.1 Ko
-BENCHMARK(crc32_fast)->Arg(1000);  // 1 Ko
-BENCHMARK(crc32_fast)->Arg(1000000);  // 1 Mo
-BENCHMARK(crc32_fast)->Arg(1000000000);  // 1 Go
+BENCHMARK(crc32_fast)->RangeMultiplier(100)->Range(1, 1000000000);
 
 static void crc32_bitwise(benchmark::State& state)
 {
@@ -65,11 +61,7 @@ static void crc32_bitwise(benchmark::State& state)
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
-BENCHMARK(crc32_bitwise)->Arg(10);  // 10 o
-BENCHMARK(crc32_bitwise)->Arg(100);  // 0.1 Ko
-BENCHMARK(crc32_bitwise)->Arg(1000);  // 1 Ko
-BENCHMARK(crc32_bitwise)->Arg(1000000);  // 1 Mo
-BENCHMARK(crc32_bitwise)->Arg(1000000000);  // 1 Go
+BENCHMARK(crc32_bitwise)->RangeMultiplier(100)->Range(1, 1000000000);
 
 static void crc32_halfbyte(benchmark::State& state)
 {
@@ -86,11 +78,7 @@ static void crc32_halfbyte(benchmark::State& state)
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
-BENCHMARK(crc32_halfbyte)->Arg(10);  // 10 o
-BENCHMARK(crc32_halfbyte)->Arg(100);  // 0.1 Ko
-BENCHMARK(crc32_halfbyte)->Arg(1000);  // 1 Ko
-BENCHMARK(crc32_halfbyte)->Arg(1000000);  // 1 Mo
-BENCHMARK(crc32_halfbyte)->Arg(1000000000);  // 1 Go
+BENCHMARK(crc32_halfbyte)->RangeMultiplier(100)->Range(1, 1000000000);
 
 #ifdef CRC32_USE_LOOKUP_TABLE_BYTE
 
@@ -109,11 +97,7 @@ static void crc32_1byte(benchmark::State& state)
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
-BENCHMARK(crc32_1byte)->Arg(10);  // 10 o
-BENCHMARK(crc32_1byte)->Arg(100);  // 0.1 Ko
-BENCHMARK(crc32_1byte)->Arg(1000);  // 1 Ko
-BENCHMARK(crc32_1byte)->Arg(1000000);  // 1 Mo
-BENCHMARK(crc32_1byte)->Arg(1000000000);  // 1 Go
+BENCHMARK(crc32_1byte)->RangeMultiplier(100)->Range(1, 1000000000);
 
 static void crc32_1byte_tableless(benchmark::State& state)
 {
@@ -130,11 +114,7 @@ static void crc32_1byte_tableless(benchmark::State& state)
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
-BENCHMARK(crc32_1byte_tableless)->Arg(10);  // 10 o
-BENCHMARK(crc32_1byte_tableless)->Arg(100);  // 0.1 Ko
-BENCHMARK(crc32_1byte_tableless)->Arg(1000);  // 1 Ko
-BENCHMARK(crc32_1byte_tableless)->Arg(1000000);  // 1 Mo
-BENCHMARK(crc32_1byte_tableless)->Arg(1000000000);  // 1 Go
+BENCHMARK(crc32_1byte_tableless)->RangeMultiplier(100)->Range(1, 1000000000);
 
 static void crc32_1byte_tableless2(benchmark::State& state)
 {
@@ -151,11 +131,7 @@ static void crc32_1byte_tableless2(benchmark::State& state)
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
-BENCHMARK(crc32_1byte_tableless2)->Arg(10);  // 10 o
-BENCHMARK(crc32_1byte_tableless2)->Arg(100);  // 0.1 Ko
-BENCHMARK(crc32_1byte_tableless2)->Arg(1000);  // 1 Ko
-BENCHMARK(crc32_1byte_tableless2)->Arg(1000000);  // 1 Mo
-BENCHMARK(crc32_1byte_tableless2)->Arg(1000000000);  // 1 Go
+BENCHMARK(crc32_1byte_tableless2)->RangeMultiplier(100)->Range(1, 1000000000);
 
 #endif
 
@@ -176,11 +152,7 @@ static void crc32_4bytes(benchmark::State& state)
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
-BENCHMARK(crc32_4bytes)->Arg(10);  // 10 o
-BENCHMARK(crc32_4bytes)->Arg(100);  // 0.1 Ko
-BENCHMARK(crc32_4bytes)->Arg(1000);  // 1 Ko
-BENCHMARK(crc32_4bytes)->Arg(1000000);  // 1 Mo
-BENCHMARK(crc32_4bytes)->Arg(1000000000);  // 1 Go
+BENCHMARK(crc32_4bytes)->RangeMultiplier(100)->Range(1, 1000000000);
 
 #endif
 
@@ -201,11 +173,7 @@ static void crc32_8bytes(benchmark::State& state)
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
-BENCHMARK(crc32_8bytes)->Arg(10);  // 10 o
-BENCHMARK(crc32_8bytes)->Arg(100);  // 0.1 Ko
-BENCHMARK(crc32_8bytes)->Arg(1000);  // 1 Ko
-BENCHMARK(crc32_8bytes)->Arg(1000000);  // 1 Mo
-BENCHMARK(crc32_8bytes)->Arg(1000000000);  // 1 Go
+BENCHMARK(crc32_8bytes)->RangeMultiplier(100)->Range(1, 1000000000);
 
 static void crc32_4x8bytes(benchmark::State& state)
 {
@@ -222,11 +190,7 @@ static void crc32_4x8bytes(benchmark::State& state)
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
-BENCHMARK(crc32_4x8bytes)->Arg(10);  // 10 o
-BENCHMARK(crc32_4x8bytes)->Arg(100);  // 0.1 Ko
-BENCHMARK(crc32_4x8bytes)->Arg(1000);  // 1 Ko
-BENCHMARK(crc32_4x8bytes)->Arg(1000000);  // 1 Mo
-BENCHMARK(crc32_4x8bytes)->Arg(1000000000);  // 1 Go
+BENCHMARK(crc32_4x8bytes)->RangeMultiplier(100)->Range(1, 1000000000);
 
 #endif
 
@@ -247,11 +211,7 @@ static void crc32_16bytes(benchmark::State& state)
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
-BENCHMARK(crc32_16bytes)->Arg(10);  // 10 o
-BENCHMARK(crc32_16bytes)->Arg(100);  // 0.1 Ko
-BENCHMARK(crc32_16bytes)->Arg(1000);  // 1 Ko
-BENCHMARK(crc32_16bytes)->Arg(1000000);  // 1 Mo
-BENCHMARK(crc32_16bytes)->Arg(1000000000);  // 1 Go
+BENCHMARK(crc32_16bytes)->RangeMultiplier(100)->Range(1, 1000000000);
 
 static void crc32_16bytes_prefetch(benchmark::State& state)
 {
@@ -268,11 +228,7 @@ static void crc32_16bytes_prefetch(benchmark::State& state)
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
-BENCHMARK(crc32_16bytes_prefetch)->Arg(10);  // 10 o
-BENCHMARK(crc32_16bytes_prefetch)->Arg(100);  // 0.1 Ko
-BENCHMARK(crc32_16bytes_prefetch)->Arg(1000);  // 1 Ko
-BENCHMARK(crc32_16bytes_prefetch)->Arg(1000000);  // 1 Mo
-BENCHMARK(crc32_16bytes_prefetch)->Arg(1000000000);  // 1 Go
+BENCHMARK(crc32_16bytes_prefetch)->RangeMultiplier(100)->Range(1, 1000000000);
 
 #endif
 
