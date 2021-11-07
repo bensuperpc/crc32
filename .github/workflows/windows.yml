@@ -32,7 +32,9 @@ jobs:
         run: cmake -E make_directory ${{runner.workspace}}/build
 
       - name: Configure
-        run: cmake -S . -B build -D CMAKE_BUILD_TYPE=${{matrix.build_type}} -A ${{matrix.platform}} -D CMAKE_CXX_STANDARD=${{matrix.standard}} -D BUILD_SHARED_LIBS=${{matrix.shared}} --preset=ci-windows
+        run: cmake -S . -B build -D CMAKE_BUILD_TYPE=${{matrix.build_type}}
+          -A ${{matrix.platform}} -D CMAKE_CXX_STANDARD=${{matrix.standard}}
+          -D BUILD_SHARED_LIBS=${{matrix.shared}} --preset=ci-windows
 
       - name: Build
         run: |
@@ -41,6 +43,6 @@ jobs:
 
       - name: Test
         working-directory: build
-        run: ctest --output-on-failure -j 2
+        run: ctest --test-dir build --verbose --output-on-failure --parallel 2
         env:
           CTEST_OUTPUT_ON_FAILURE: True

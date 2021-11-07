@@ -32,7 +32,8 @@ jobs:
 
       - name: Configure
         run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -D BUILD_SHARED_LIBS=${{matrix.shared}} \
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=${{matrix.build_type}} \
+            -D BUILD_SHARED_LIBS=${{matrix.shared}} \
             -D CMAKE_CXX_STANDARD=${{matrix.standard}} --preset=ci-macos
 
       - name: Build
@@ -41,7 +42,6 @@ jobs:
           cmake --build build  --config ${{matrix.build_type}} --parallel $threads
 
       - name: Test
-        working-directory: build
-        run: ctest --output-on-failure -j 2
+        run: ctest --test-dir build --verbose --output-on-failure --parallel 2
         env:
           CTEST_OUTPUT_ON_FAILURE: True
