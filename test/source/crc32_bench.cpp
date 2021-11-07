@@ -39,6 +39,8 @@ static void crc32_fast(benchmark::State& state)
     // Make sure the variable is not optimized away by compiler
     benchmark::DoNotOptimize(str);
   }
+  state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
 BENCHMARK(crc32_fast)->Arg(10);
@@ -57,6 +59,8 @@ static void crc32_bitwise(benchmark::State& state)
     // Make sure the variable is not optimized away by compiler
     benchmark::DoNotOptimize(str);
   }
+  state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
 BENCHMARK(crc32_bitwise)->Arg(10);
@@ -75,6 +79,8 @@ static void crc32_halfbyte(benchmark::State& state)
     // Make sure the variable is not optimized away by compiler
     benchmark::DoNotOptimize(str);
   }
+  state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
 BENCHMARK(crc32_halfbyte)->Arg(10);
@@ -95,6 +101,8 @@ static void crc32_1byte(benchmark::State& state)
     // Make sure the variable is not optimized away by compiler
     benchmark::DoNotOptimize(str);
   }
+  state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
 BENCHMARK(crc32_1byte)->Arg(10);
@@ -113,6 +121,8 @@ static void crc32_1byte_tableless(benchmark::State& state)
     // Make sure the variable is not optimized away by compiler
     benchmark::DoNotOptimize(str);
   }
+  state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
 BENCHMARK(crc32_1byte_tableless)->Arg(10);
@@ -131,6 +141,8 @@ static void crc32_1byte_tableless2(benchmark::State& state)
     // Make sure the variable is not optimized away by compiler
     benchmark::DoNotOptimize(str);
   }
+  state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
 BENCHMARK(crc32_1byte_tableless2)->Arg(10);
@@ -153,6 +165,8 @@ static void crc32_4bytes(benchmark::State& state)
     // Make sure the variable is not optimized away by compiler
     benchmark::DoNotOptimize(str);
   }
+  state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
 BENCHMARK(crc32_4bytes)->Arg(10);
@@ -175,6 +189,8 @@ static void crc32_8bytes(benchmark::State& state)
     // Make sure the variable is not optimized away by compiler
     benchmark::DoNotOptimize(str);
   }
+  state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
 BENCHMARK(crc32_8bytes)->Arg(10);
@@ -193,6 +209,8 @@ static void crc32_4x8bytes(benchmark::State& state)
     // Make sure the variable is not optimized away by compiler
     benchmark::DoNotOptimize(str);
   }
+  state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
 BENCHMARK(crc32_4x8bytes)->Arg(10);
@@ -215,6 +233,8 @@ static void crc32_16bytes(benchmark::State& state)
     // Make sure the variable is not optimized away by compiler
     benchmark::DoNotOptimize(str);
   }
+  state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
 BENCHMARK(crc32_16bytes)->Arg(10);
@@ -233,6 +253,8 @@ static void crc32_16bytes_prefetch(benchmark::State& state)
     // Make sure the variable is not optimized away by compiler
     benchmark::DoNotOptimize(str);
   }
+  state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 // Register the function as a benchmark
 BENCHMARK(crc32_16bytes_prefetch)->Arg(10);

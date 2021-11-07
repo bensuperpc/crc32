@@ -51,7 +51,7 @@ if(UNIX AND NOT APPLE)
 
   add_executable(crc32_bench source/crc32_bench.cpp)
   target_link_libraries(crc32_bench PRIVATE crc32::crc32 benchmark::benchmark_main)
-  # add_test(NAME crc32_bench COMMAND crc32_bench)
+  add_test(NAME crc32_bench COMMAND crc32_bench)
 
   add_executable(crc32_test source/crc32_test.cpp)
   target_link_libraries(crc32_test PRIVATE crc32::crc32 gtest_main)
