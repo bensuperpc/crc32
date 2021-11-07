@@ -16,7 +16,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        build_type: [Debug]
+        build_type: [Debug, Release]
         shared: [YES, NO]
         standard: [11, 17]
 

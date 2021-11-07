@@ -10,14 +10,7 @@ if(PROJECT_IS_TOP_LEVEL)
   enable_testing()
 endif()
 
-#add_executable(crc32_test source/crc32_test.cpp)
-#target_link_libraries(crc32_test PRIVATE crc32::crc32)
-#target_compile_features(crc32_test PRIVATE cxx_std_17)
-
-#add_test(NAME crc32_test COMMAND crc32_test)
-
-
-#if(UNIX AND NOT APPLE)
+if(WIN32)
   include(FetchContent)
 
   # Externally provided libraries
@@ -48,16 +41,17 @@ endif()
 
   FetchContent_MakeAvailable(googletest googlebenchmark)
   # Lib: gtest_main benchmark::benchmark benchmark::benchmark_main
+  #target_compile_features(crc32_test PRIVATE cxx_std_17)
 
   add_executable(crc32_bench source/crc32_bench.cpp)
   target_link_libraries(crc32_bench PRIVATE crc32::crc32 benchmark::benchmark_main)
   add_test(NAME crc32_bench COMMAND crc32_bench)
-  windows_set_path(crc32_bench crc32::crc32 benchmark::benchmark_main)
+  # windows_set_path(crc32_bench crc32::crc32 benchmark::benchmark_main)
 
   add_executable(crc32_test source/crc32_test.cpp)
   target_link_libraries(crc32_test PRIVATE crc32::crc32 gtest_main)
   add_test(NAME crc32_test COMMAND crc32_test)
-  windows_set_path(crc32_test crc32::crc32 gtest_main)
-#else()
-#  message(WARNING "Disable tests, only tested on Linux x86_64")
-#endif()
+  # windows_set_path(crc32_test crc32::crc32 gtest_main)
+else()
+  message(WARNING "Disable tests, only tested on Linux and MacOS x86_64")
+endif()
