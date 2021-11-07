@@ -24,28 +24,51 @@ if(NOT WIN32)
     GIT_REPOSITORY https://github.com/google/benchmark.git
     GIT_TAG main)
 
-  #set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  # set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
-  set(FOLDER_benchmark "gbenchmark" CACHE STRING "" FORCE)
-  set(FOLDER_gtest "gtest" CACHE STRING "" FORCE)
-  set(FOLDER_gmock "gmock" CACHE STRING "" FORCE)
-  set(FOLDER_googletest-distribution "googletest-distribution" CACHE STRING "" FORCE)
+  set(FOLDER_benchmark
+      "gbenchmark"
+      CACHE STRING "" FORCE)
+  set(FOLDER_gtest
+      "gtest"
+      CACHE STRING "" FORCE)
+  set(FOLDER_gmock
+      "gmock"
+      CACHE STRING "" FORCE)
+  set(FOLDER_googletest-distribution
+      "googletest-distribution"
+      CACHE STRING "" FORCE)
 
   # Disable tests on gtest
-  set(gtest_build_tests OFF CACHE BOOL "" FORCE)
-  set(gtest_build_samples OFF CACHE BOOL "" FORCE)
+  set(gtest_build_tests
+      OFF
+      CACHE BOOL "" FORCE)
+  set(gtest_build_samples
+      OFF
+      CACHE BOOL "" FORCE)
 
   # Disable tests on google benchmark
-  set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
-  set(BENCHMARK_ENABLE_WERROR OFF CACHE BOOL "" FORCE)
+  set(BENCHMARK_ENABLE_TESTING
+      OFF
+      CACHE BOOL "" FORCE)
+  set(BENCHMARK_ENABLE_WERROR
+      OFF
+      CACHE BOOL "" FORCE)
 
   FetchContent_MakeAvailable(googletest googlebenchmark)
   # Lib: gtest_main benchmark::benchmark benchmark::benchmark_main
-  #target_compile_features(crc32_test PRIVATE cxx_std_17)
+  # target_compile_features(crc32_test PRIVATE cxx_std_17)
 
   add_executable(crc32_bench source/crc32_bench.cpp)
-  target_link_libraries(crc32_bench PRIVATE crc32::crc32 benchmark::benchmark_main)
-  add_test(NAME crc32_bench COMMAND crc32_bench)
+  target_link_libraries(crc32_bench PRIVATE crc32::crc32
+                                            benchmark::benchmark_main)
+
+  if(NOT CMAKE_BUILD_TYPE MATCHES Debug)
+    add_test(NAME crc32_bench COMMAND crc32_bench)
+  elseif()
+    message(MESSAGE "Disable crc32_bench, Performance benchmark test only run on Release/RelWithDebInfo/MinSizeRel")
+  endif()
+
   # windows_set_path(crc32_bench crc32::crc32 benchmark::benchmark_main)
 
   add_executable(crc32_test source/crc32_test.cpp)
