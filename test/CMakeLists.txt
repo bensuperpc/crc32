@@ -10,7 +10,7 @@ if(PROJECT_IS_TOP_LEVEL)
   enable_testing()
 endif()
 
-if(WIN32)
+if(NOT WIN32)
   include(FetchContent)
 
   # Externally provided libraries
