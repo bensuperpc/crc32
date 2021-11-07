@@ -22,7 +22,11 @@ jobs:
         platform: [Win32, x64]
         build_type: [Debug, Release]
     steps:
-      - uses: actions/checkout@v2
+      - name: "Checkout Code"
+        uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+          fetch-depth: 0
 
       - name: Create Build Environment
         run: cmake -E make_directory ${{runner.workspace}}/build

@@ -41,6 +41,7 @@ static void crc32_fast(benchmark::State& state)
   }
   state.SetItemsProcessed(state.iterations() * state.range(0));
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
+  // state.SetLabel("OK");
 }
 // Register the function as a benchmark
 BENCHMARK(crc32_fast)->Arg(10);
