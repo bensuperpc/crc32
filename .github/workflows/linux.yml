@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        compiler: [g++-10, clang++-10]
+        compiler: [g++, clang++]
         shared: [YES, NO]
         standard: [11, 14, 17, 20]
         build_type: [Debug, Release]
