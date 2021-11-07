@@ -355,8 +355,9 @@ uint32_t crc32::crc32_16bytes(const void* data,
 
   const uint8_t* currentChar = reinterpret_cast<const uint8_t*>(current);
   // remaining 1 to 63 bytes (standard algorithm)
-  while (length-- != 0)
+  while (length-- != 0) {
     crc = (crc >> 8) ^ Crc32Lookup[0][(crc & 0xFF) ^ *currentChar++];
+  }
 
   return ~crc;  // same as crc ^ 0xFFFFFFFF
 }
@@ -423,8 +424,9 @@ uint32_t crc32::crc32_16bytes_prefetch(const void* data,
 
   const uint8_t* currentChar = reinterpret_cast<const uint8_t*>(current);
   // remaining 1 to 63 bytes (standard algorithm)
-  while (length-- != 0)
+  while (length-- != 0) {
     crc = (crc >> 8) ^ Crc32Lookup[0][(crc & 0xFF) ^ *currentChar++];
+  }
 
   return ~crc;  // same as crc ^ 0xFFFFFFFF
 }
