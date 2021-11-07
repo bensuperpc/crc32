@@ -66,7 +66,7 @@ if(NOT WIN32)
   if(NOT CMAKE_BUILD_TYPE MATCHES Debug)
     add_test(NAME crc32_bench COMMAND crc32_bench)
   elseif()
-    message(MESSAGE "Disable crc32_bench, Performance benchmark test only run on Release/RelWithDebInfo/MinSizeRel")
+    message(STATUS "Disable crc32_bench, Performance benchmark test only run on Release/RelWithDebInfo/MinSizeRel")
   endif()
 
   # windows_set_path(crc32_bench crc32::crc32 benchmark::benchmark_main)
