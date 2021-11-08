@@ -4,6 +4,7 @@
 // see http://create.stephan-brumme.com/disclaimer.html
 //
 
+#include <chrono>  // std::chrono
 #include <cstdio>
 #include <cstdlib>
 
@@ -16,6 +17,8 @@
 #define CRC32_TEST_HALFBYTE
 #define CRC32_TEST_TABLELESS
 
+using cpp_clock = std::chrono::high_resolution_clock;
+
 // //////////////////////////////////////////////////////////
 // test code
 
@@ -23,27 +26,6 @@
 const size_t NumBytes = 1024 * 1024 * 1024;
 /// 4k chunks during last test
 const size_t DefaultChunkSize = 4 * 1024;
-
-#if defined(_WIN32) || defined(_WIN64)
-#  include <windows.h>
-#else
-#  include <ctime>
-#endif
-
-// timing
-static double seconds()
-{
-#if defined(_WIN32) || defined(_WIN64)
-  LARGE_INTEGER frequency, now;
-  QueryPerformanceFrequency(&frequency);
-  QueryPerformanceCounter(&now);
-  return now.QuadPart / double(frequency.QuadPart);
-#else
-  timespec now;
-  clock_gettime(CLOCK_REALTIME, &now);
-  return now.tv_sec + now.tv_nsec / 1000000000.0;
-#endif
-}
 
 auto main(int argc, char* argv[]) -> int
 {
@@ -60,14 +42,18 @@ auto main(int argc, char* argv[]) -> int
   }
 
   // re-use variables
-  double startTime, duration;
-  uint32_t crc;
+  auto start_time = cpp_clock::now();
+
+  double duration = 0.0;
+  uint32_t crc = 0;
 
 #ifdef CRC32_TEST_BITWISE
   // bitwise
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = crc32::crc32_bitwise(data, NumBytes);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf("bitwise          : CRC=%08X, %.3fs, %.3f MB/s\n",
          crc,
          duration,
@@ -76,9 +62,11 @@ auto main(int argc, char* argv[]) -> int
 
 #ifdef CRC32_TEST_HALFBYTE
   // half-byte
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = crc32::crc32_halfbyte(data, NumBytes);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf("half-byte        : CRC=%08X, %.3fs, %.3f MB/s\n",
          crc,
          duration,
@@ -87,18 +75,22 @@ auto main(int argc, char* argv[]) -> int
 
 #ifdef CRC32_TEST_TABLELESS
   // one byte at once (without lookup tables)
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = crc32::crc32_1byte_tableless(data, NumBytes);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf("tableless (byte) : CRC=%08X, %.3fs, %.3f MB/s\n",
          crc,
          duration,
          (NumBytes / (1024 * 1024)) / duration);
 
   // one byte at once (without lookup tables)
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = crc32::crc32_1byte_tableless2(data, NumBytes);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf("tableless (byte2): CRC=%08X, %.3fs, %.3f MB/s\n",
          crc,
          duration,
@@ -107,9 +99,11 @@ auto main(int argc, char* argv[]) -> int
 
 #ifdef CRC32_USE_LOOKUP_TABLE_BYTE
   // one byte at once
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = crc32::crc32_1byte(data, NumBytes);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf("  1 byte  at once: CRC=%08X, %.3fs, %.3f MB/s\n",
          crc,
          duration,
@@ -118,9 +112,11 @@ auto main(int argc, char* argv[]) -> int
 
 #ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_4
   // four bytes at once
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = crc32::crc32_4bytes(data, NumBytes);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf("  4 bytes at once: CRC=%08X, %.3fs, %.3f MB/s\n",
          crc,
          duration,
@@ -129,18 +125,22 @@ auto main(int argc, char* argv[]) -> int
 
 #ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
   // eight bytes at once
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = crc32::crc32_8bytes(data, NumBytes);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf("  8 bytes at once: CRC=%08X, %.3fs, %.3f MB/s\n",
          crc,
          duration,
          (NumBytes / (1024 * 1024)) / duration);
 
   // eight bytes at once, unrolled 4 times (=> 32 bytes per loop)
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = crc32::crc32_4x8bytes(data, NumBytes);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf("4x8 bytes at once: CRC=%08X, %.3fs, %.3f MB/s\n",
          crc,
          duration,
@@ -149,18 +149,22 @@ auto main(int argc, char* argv[]) -> int
 
 #ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_16
   // sixteen bytes at once
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = crc32::crc32_16bytes(data, NumBytes);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf(" 16 bytes at once: CRC=%08X, %.3fs, %.3f MB/s\n",
          crc,
          duration,
          (NumBytes / (1024 * 1024)) / duration);
 
   // sixteen bytes at once
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = crc32::crc32_16bytes_prefetch(data, NumBytes, 0, 256);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf(
       " 16 bytes at once: CRC=%08X, %.3fs, %.3f MB/s (including prefetching)\n",
       crc,
@@ -169,7 +173,7 @@ auto main(int argc, char* argv[]) -> int
 #endif  // CRC32_USE_LOOKUP_TABLE_SLICING_BY_16
 
   // process in 4k chunks
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = 0;  // also default parameter of crc32_xx functions
   size_t bytesProcessed = 0;
   while (bytesProcessed < NumBytes) {
@@ -181,7 +185,9 @@ auto main(int argc, char* argv[]) -> int
 
     bytesProcessed += chunkSize;
   }
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf("    chunked      : CRC=%08X, %.3fs, %.3f MB/s\n",
          crc,
          duration,

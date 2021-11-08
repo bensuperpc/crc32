@@ -4,6 +4,7 @@
 // see http://create.stephan-brumme.com/disclaimer.html
 //
 
+#include <chrono>  // std::chrono
 #include <cstdio>
 #include <cstdlib>
 #include <string>
@@ -21,26 +22,7 @@
 /// one gigabyte
 const size_t NumBytes = 1024 * 1024 * 1024;
 
-#if defined(_WIN32) || defined(_WIN64)
-#  include <windows.h>
-#else
-#  include <ctime>
-#endif
-
-// timing
-static double seconds()
-{
-#if defined(_WIN32) || defined(_WIN64)
-  LARGE_INTEGER frequency, now;
-  QueryPerformanceFrequency(&frequency);
-  QueryPerformanceCounter(&now);
-  return now.QuadPart / double(frequency.QuadPart);
-#else
-  timespec now;
-  clock_gettime(CLOCK_REALTIME, &now);
-  return now.tv_sec + now.tv_nsec / 1000000000.0;
-#endif
-}
+using cpp_clock = std::chrono::high_resolution_clock;
 
 // //////////////////////////////////////////////////////////
 // run a CRC32 algorithm on multiple threads
@@ -142,8 +124,10 @@ int main(int argc, char* argv[])
   }
 
   // re-use variables
-  double startTime, duration;
-  uint32_t crc;
+  auto start_time = cpp_clock::now();
+
+  double duration = 0.0;
+  uint32_t crc = 0;
 
   // number of threads: use all cores by default or set number as command-line
   // parameter
@@ -156,9 +140,11 @@ int main(int argc, char* argv[])
 
   // //////////////////////////////////////////////////////////
   // one byte at once
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = run(crc32::crc32_1byte, data, NumBytes, numThreads);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf("  1 byte  at once / %d threads: CRC=%08X, %.3fs, %.3f MB/s\n",
          numThreads,
          crc,
@@ -166,9 +152,11 @@ int main(int argc, char* argv[])
          (NumBytes / (1024 * 1024)) / duration);
 
   // four bytes at once
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = run(crc32::crc32_4bytes, data, NumBytes, numThreads);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf("  4 bytes at once / %d threads: CRC=%08X, %.3fs, %.3f MB/s\n",
          numThreads,
          crc,
@@ -176,9 +164,11 @@ int main(int argc, char* argv[])
          (NumBytes / (1024 * 1024)) / duration);
 
   // eight bytes at once
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = run(crc32::crc32_8bytes, data, NumBytes, numThreads);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf("  8 bytes at once / %d threads: CRC=%08X, %.3fs, %.3f MB/s\n",
          numThreads,
          crc,
@@ -186,9 +176,11 @@ int main(int argc, char* argv[])
          (NumBytes / (1024 * 1024)) / duration);
 
   // eight bytes at once, unrolled 4 times (=> 32 bytes per loop)
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = run(crc32::crc32_4x8bytes, data, NumBytes, numThreads);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf("4x8 bytes at once / %d threads: CRC=%08X, %.3fs, %.3f MB/s\n",
          numThreads,
          crc,
@@ -196,9 +188,11 @@ int main(int argc, char* argv[])
          (NumBytes / (1024 * 1024)) / duration);
 
   // sixteen bytes at once
-  startTime = seconds();
+  start_time = cpp_clock::now();
   crc = run(crc32::crc32_16bytes, data, NumBytes, numThreads);
-  duration = seconds() - startTime;
+  duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                 cpp_clock::now() - start_time)
+                 .count();
   printf(" 16 bytes at once / %d threads: CRC=%08X, %.3fs, %.3f MB/s\n",
          numThreads,
          crc,
@@ -210,7 +204,7 @@ int main(int argc, char* argv[])
   printf("run slicing-by-8 algorithm with 1 to %d threads:\n", numThreads);
   for (auto scaleThreads = 1; scaleThreads <= numThreads; scaleThreads++) {
     // eight bytes at once
-    startTime = seconds();
+    start_time = cpp_clock::now();
 
     if (scaleThreads == 1)
       crc = crc32::crc32_8bytes(data, NumBytes);  // single-threaded
@@ -218,7 +212,9 @@ int main(int argc, char* argv[])
       crc = run(
           crc32::crc32_8bytes, data, NumBytes, scaleThreads);  // multi-threaded
 
-    duration = seconds() - startTime;
+    duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+                   cpp_clock::now() - start_time)
+                   .count();
     printf("  8 bytes at once / %d threads: CRC=%08X, %.3fs, %.3f MB/s\n",
            scaleThreads,
            crc,

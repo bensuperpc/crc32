@@ -29,7 +29,7 @@ function(add_example_thread NAME)
   add_dependencies(run-examples "run_${NAME}")
 endfunction()
 
-add_example(test_example)
+add_example(crc32_test_singlethreaded)
 add_example(simple_example)
 
 
