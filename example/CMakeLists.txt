@@ -20,7 +20,27 @@ function(add_example NAME)
   add_dependencies(run-examples "run_${NAME}")
 endfunction()
 
+function(add_example_thread NAME)
+  add_executable("${NAME}" "${NAME}.cpp")
+  target_link_libraries("${NAME}" PRIVATE crc32::crc32 Threads::Threads)
+#  target_compile_features("${NAME}" PRIVATE cxx_std_17)
+  add_custom_target("run_${NAME}" COMMAND "${NAME}" VERBATIM)
+  add_dependencies("run_${NAME}" "${NAME}")
+  add_dependencies(run-examples "run_${NAME}")
+endfunction()
+
 add_example(test_example)
 add_example(simple_example)
+
+
+set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
+set(THREADS_PREFER_PTHREAD_FLAG TRUE)
+find_package(Threads)
+
+if(Threads_FOUND)
+  add_example_thread(crc32_test_multithreaded)
+else()
+message(WARNING "Threads not found ! Disable crc32_test_multithreaded example." )
+endif()
 
 add_folders(Example)
