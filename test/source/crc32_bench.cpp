@@ -19,7 +19,7 @@ static std::unique_ptr<char[]> generate(const std::uint64_t length)
   uint32_t randomNumber = 0x27121978;
   // initialize
   std::unique_ptr<char[]> data(new char[length]);
-  for (size_t i = 0; i < length; i++) {
+  for (std::uint64_t i = 0; i < length; i++) {
     data[i] = char(randomNumber & 0xFF);
     // simple LCG, see
     // http://en.wikipedia.org/wiki/Linear_congruential_generator
