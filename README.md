@@ -9,8 +9,8 @@ This is a mirror of my CRC32 library hosted at https://create.stephan-brumme.com
 - The fastest algorithms need about 1 CPU cycle per byte
 - Endian-aware
 - Support for [multi-threaded computation](example/crc32_test_multithreaded.cpp)
-- Cross-plateform support: Linux 32/64, MacOS, Windows 32/64, Android 32/64
-- Multi-plateform arch support: AMD64, I386, ARMv8, ARMv7, ARMv6, ARMv5, RISC-V 32/64, PPC64le, Mips, m68k..
+- Multi OS support: Linux 32/64, MacOS, Windows 32/64, Android 32/64
+- Cross-plateform support: AMD64, I386, ARMv8, ARMv7, ARMv6, ARMv5, RISC-V 32/64, PPC64le, Mips, m68k..
 - Runs even on [Arduino](Crc32Best.ino), Raspberry Pi, etc.
 - Quite long posting about it on https://create.stephan-brumme.com/crc32/, describing each implemented algorithm in detail
 
