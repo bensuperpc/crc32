@@ -40,7 +40,7 @@ static void crc32_fast_bench(benchmark::State& state)
 
     benchmark::ClobberMemory();
   }
-  // state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetItemsProcessed(state.iterations());
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 
   // state.SetLabel("OK");
@@ -61,7 +61,7 @@ static void crc32_bitwise_bench(benchmark::State& state)
     crc32::crc32_bitwise(str.get(), size, 0);
     benchmark::ClobberMemory();
   }
-  // state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetItemsProcessed(state.iterations());
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 BENCHMARK(crc32_bitwise_bench)
@@ -80,7 +80,7 @@ static void crc32_halfbyte_bench(benchmark::State& state)
     crc32::crc32_halfbyte(str.get(), size, 0);
     benchmark::ClobberMemory();
   }
-  // state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetItemsProcessed(state.iterations());
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 BENCHMARK(crc32_halfbyte_bench)
@@ -101,7 +101,7 @@ static void crc32_1byte_bench(benchmark::State& state)
     crc32::crc32_1byte(str.get(), size, 0);
     benchmark::ClobberMemory();
   }
-  // state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetItemsProcessed(state.iterations());
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 BENCHMARK(crc32_1byte_bench)
@@ -120,7 +120,7 @@ static void crc32_1byte_tableless_bench(benchmark::State& state)
     crc32::crc32_1byte_tableless(str.get(), size, 0);
     benchmark::ClobberMemory();
   }
-  // state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetItemsProcessed(state.iterations());
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 BENCHMARK(crc32_1byte_tableless_bench)
@@ -139,7 +139,7 @@ static void crc32_1byte_tableless2_bench(benchmark::State& state)
     crc32::crc32_1byte_tableless2(str.get(), size, 0);
     benchmark::ClobberMemory();
   }
-  // state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetItemsProcessed(state.iterations());
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 BENCHMARK(crc32_1byte_tableless2_bench)
@@ -162,7 +162,7 @@ static void crc32_4bytes_bench(benchmark::State& state)
     crc32::crc32_4bytes(str.get(), size, 0);
     benchmark::ClobberMemory();
   }
-  // state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetItemsProcessed(state.iterations());
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 BENCHMARK(crc32_4bytes_bench)
@@ -185,7 +185,7 @@ static void crc32_8bytes_bench(benchmark::State& state)
     crc32::crc32_8bytes(str.get(), size, 0);
     benchmark::ClobberMemory();
   }
-  // state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetItemsProcessed(state.iterations());
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 BENCHMARK(crc32_8bytes_bench)
@@ -204,7 +204,7 @@ static void crc32_4x8bytes_bench(benchmark::State& state)
     crc32::crc32_4x8bytes(str.get(), size, 0);
     benchmark::ClobberMemory();
   }
-  // state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetItemsProcessed(state.iterations());
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 BENCHMARK(crc32_4x8bytes_bench)
@@ -227,7 +227,7 @@ static void crc32_16bytes_bench(benchmark::State& state)
     crc32::crc32_16bytes(str.get(), size, 0);
     benchmark::ClobberMemory();
   }
-  // state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetItemsProcessed(state.iterations());
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 BENCHMARK(crc32_16bytes_bench)
@@ -246,7 +246,7 @@ static void crc32_16bytes_prefetch_bench(benchmark::State& state)
     crc32::crc32_16bytes_prefetch(str.get(), size, 0, 512);
     benchmark::ClobberMemory();
   }
-  // state.SetItemsProcessed(state.iterations() * state.range(0));
+  state.SetItemsProcessed(state.iterations());
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 BENCHMARK(crc32_16bytes_prefetch_bench)
