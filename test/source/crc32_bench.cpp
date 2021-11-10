@@ -269,7 +269,7 @@ static void crc32_16bytes_prefetch_bench(benchmark::State& state)
   state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
 }
 BENCHMARK(crc32_16bytes_prefetch_bench)
-    ->Name("crc32_16bytes")
+    ->Name("crc32_16bytes_prefetch")
     ->RangeMultiplier(100)
     ->Range(1, 1000000000);
 
