@@ -12,12 +12,12 @@ plt.rcParams['figure.figsize'] = [21, 12]
 
 def extract_label_from_benchmark(benchmark):
     benchmark_name = benchmark['name']
-    return benchmark_name.split('/')[0][3:]  # erase `BM_`
+    return benchmark_name.split('/')[0]  # remove after /
 
 
 def extract_size_from_benchmark(benchmark):
     benchmark_name = benchmark['name']
-    return benchmark_name.split('/')[1]  # not int, for exp scale x axis
+    return benchmark_name.split('/')[1]  # remove before /
 
 
 if __name__ == "__main__":
