@@ -9,6 +9,7 @@
 // if running on an embedded system, you might consider shrinking the
 // big Crc32Lookup table:
 // - crc32_bitwise  doesn't need it at all
+// - crc32_bitwise_banch doesn't need it at all
 // - crc32_halfbyte has its own small lookup table
 // - crc32_1byte    needs only Crc32Lookup[0]
 // - crc32_4bytes   needs only Crc32Lookup[0..3]
@@ -32,12 +33,30 @@ uint32_t crc32::crc32_bitwise(const void* data,
     for (int j = 0; j < 8; j++) {
       // branch-free
       crc = (crc >> 1) ^ (-int32_t(crc & 1) & Polynomial);
+    }
+  }
 
-      // branching, much slower:
-      // if (crc & 1)
-      //  crc = (crc >> 1) ^ Polynomial;
-      // else
-      //  crc =  crc >> 1;
+  return ~crc;  // same as crc ^ 0xFFFFFFFF
+}
+
+/// compute CRC32 (bitwise algorithm with branching)
+uint32_t crc32::crc32_bitwise_branch(const void* data,
+                                     size_t length,
+                                     uint32_t previousCrc32)
+{
+  uint32_t crc = ~previousCrc32;  // same as previousCrc32 ^ 0xFFFFFFFF
+  const uint8_t* current = reinterpret_cast<const uint8_t*>(data);
+
+  while (length-- != 0) {
+    crc ^= *current++;
+
+    for (int j = 0; j < 8; j++) {
+      // branching, much slower
+      if (crc & 1) {
+        crc = (crc >> 1) ^ Polynomial;
+      } else {
+        crc = crc >> 1;
+      }
     }
   }
 

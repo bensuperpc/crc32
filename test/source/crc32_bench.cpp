@@ -69,6 +69,25 @@ BENCHMARK(crc32_bitwise_bench)
     ->RangeMultiplier(100)
     ->Range(1, 1000000000);
 
+static void crc32_bitwise_branch_bench(benchmark::State& state)
+{
+  // Code inside this loop is measured repeatedly
+  auto size = state.range(0);
+  auto str = generate(size);
+
+  for (auto _ : state) {
+    benchmark::DoNotOptimize(str);
+    crc32::crc32_bitwise_branch(str.get(), size, 0);
+    benchmark::ClobberMemory();
+  }
+  state.SetItemsProcessed(state.iterations());
+  state.SetBytesProcessed(state.iterations() * state.range(0) * sizeof(char));
+}
+BENCHMARK(crc32_bitwise_branch_bench)
+    ->Name("crc32_bitwise_branch")
+    ->RangeMultiplier(100)
+    ->Range(1, 1000000000);
+
 static void crc32_halfbyte_bench(benchmark::State& state)
 {
   // Code inside this loop is measured repeatedly

@@ -15,6 +15,7 @@
 #define CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
 #define CRC32_USE_LOOKUP_TABLE_SLICING_BY_16
 // - crc32_bitwise  doesn't need it at all
+// - crc32_bitwise_branch  doesn't need it at all
 // - crc32_halfbyte has its own small lookup table
 // - crc32_1byte_tableless and crc32_1byte_tableless2 don't need it at all
 // - crc32_1byte    needs only Crc32Lookup[0]
@@ -131,6 +132,12 @@ CRC32_EXPORT uint32_t crc32_combine(uint32_t crcA,
 CRC32_EXPORT uint32_t crc32_bitwise(const void* data,
                                     size_t length,
                                     uint32_t previousCrc32 = 0);
+
+/// compute CRC32 (bitwise algorithm)
+CRC32_EXPORT uint32_t crc32_bitwise_branch(const void* data,
+                                           size_t length,
+                                           uint32_t previousCrc32 = 0);
+
 /// compute CRC32 (half-byte algorithm)
 CRC32_EXPORT uint32_t crc32_halfbyte(const void* data,
                                      size_t length,
