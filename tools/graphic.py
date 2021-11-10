@@ -11,13 +11,17 @@ plt.rcParams['figure.figsize'] = [21, 12]
 
 
 def extract_label_from_benchmark(benchmark):
-    benchmark_name = benchmark['name']
-    return benchmark_name.split('/')[0]  # remove after /
+    bench_full_name = benchmark['name']
+    bench_name = bench_full_name.split('/')[0]  # Remove all after /
+    if (bench_name.startswith('BM_')):  # Remove if string start with BM_
+        return bench_name[3:]  # Remove BM_
+    else:
+        return bench_name
 
 
 def extract_size_from_benchmark(benchmark):
-    benchmark_name = benchmark['name']
-    return benchmark_name.split('/')[1]  # remove before /
+    bench_name = benchmark['name']
+    return bench_name.split('/')[1]  # Remove all before /
 
 
 if __name__ == "__main__":
@@ -35,7 +39,8 @@ if __name__ == "__main__":
             y = list(map(operator.itemgetter('bytes_per_second'), benchmark))
             #log_y = list(map(math.log, y))
             plt.plot(x, y, label=key, marker=None)
-        plt.grid(color='green', linestyle='--', linewidth=0.2)
+
+        plt.grid(color='green', linestyle='--', linewidth=0.2) # Add grid
         plt.xlabel('Array size')
         plt.ylabel('Gigabyte per second (GB/s)')
         plt.title('CRC32 Algorithm Benchmark')
