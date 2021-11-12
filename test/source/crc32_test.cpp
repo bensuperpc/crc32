@@ -400,6 +400,13 @@ TEST(crc32, advanced1)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_bitwise(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_bitwise_branch(s.data(), 1, result);
   }
   EXPECT_EQ(expected_result, result);
@@ -407,7 +414,21 @@ TEST(crc32, advanced1)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_bitwise_branch(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_halfbyte(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_halfbyte(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -422,6 +443,13 @@ TEST(crc32, advanced1)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_1byte(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_1byte_tableless(s.data(), 1, result);
   }
   EXPECT_EQ(expected_result, result);
@@ -429,7 +457,21 @@ TEST(crc32, advanced1)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_1byte_tableless(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_1byte_tableless2(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte_tableless2(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -441,6 +483,13 @@ TEST(crc32, advanced1)
   for (const char& c : str) {
     const std::string s(1, c);
     result = crc32::crc32_4bytes(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_4bytes(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -458,7 +507,21 @@ TEST(crc32, advanced1)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_8bytes(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_4x8bytes(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_4x8bytes(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -476,13 +539,39 @@ TEST(crc32, advanced1)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_16bytes(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_16bytes_prefetch(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_16bytes_prefetch(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
 #endif
 
-  EXPECT_EQ(expected_result, crc32::crc32_fast(str.data(), str.size(), 0));
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_fast(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_fast(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
 }
 
 TEST(crc32, advanced2)
@@ -501,6 +590,13 @@ TEST(crc32, advanced2)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_bitwise(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_bitwise_branch(s.data(), 1, result);
   }
   EXPECT_EQ(expected_result, result);
@@ -508,7 +604,21 @@ TEST(crc32, advanced2)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_bitwise_branch(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_halfbyte(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_halfbyte(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -523,6 +633,13 @@ TEST(crc32, advanced2)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_1byte(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_1byte_tableless(s.data(), 1, result);
   }
   EXPECT_EQ(expected_result, result);
@@ -530,7 +647,21 @@ TEST(crc32, advanced2)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_1byte_tableless(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_1byte_tableless2(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte_tableless2(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -542,6 +673,13 @@ TEST(crc32, advanced2)
   for (const char& c : str) {
     const std::string s(1, c);
     result = crc32::crc32_4bytes(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_4bytes(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -559,7 +697,21 @@ TEST(crc32, advanced2)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_8bytes(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_4x8bytes(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_4x8bytes(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -577,13 +729,39 @@ TEST(crc32, advanced2)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_16bytes(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_16bytes_prefetch(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_16bytes_prefetch(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
 #endif
 
-  EXPECT_EQ(expected_result, crc32::crc32_fast(str.data(), str.size(), 0));
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_fast(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_fast(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
 }
 
 TEST(crc32, advanced3)
@@ -602,6 +780,13 @@ TEST(crc32, advanced3)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_bitwise(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_bitwise_branch(s.data(), 1, result);
   }
   EXPECT_EQ(expected_result, result);
@@ -609,7 +794,21 @@ TEST(crc32, advanced3)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_bitwise_branch(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_halfbyte(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_halfbyte(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -624,6 +823,13 @@ TEST(crc32, advanced3)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_1byte(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_1byte_tableless(s.data(), 1, result);
   }
   EXPECT_EQ(expected_result, result);
@@ -631,7 +837,21 @@ TEST(crc32, advanced3)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_1byte_tableless(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_1byte_tableless2(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte_tableless2(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -643,6 +863,13 @@ TEST(crc32, advanced3)
   for (const char& c : str) {
     const std::string s(1, c);
     result = crc32::crc32_4bytes(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_4bytes(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -660,7 +887,21 @@ TEST(crc32, advanced3)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_8bytes(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_4x8bytes(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_4x8bytes(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -678,17 +919,423 @@ TEST(crc32, advanced3)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
+    result = crc32::crc32_16bytes(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
     result = crc32::crc32_16bytes_prefetch(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_16bytes_prefetch(s, result);
   }
   EXPECT_EQ(expected_result, result);
 
 #endif
 
-  EXPECT_EQ(expected_result, crc32::crc32_fast(str.data(), str.size(), 0));
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_fast(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_fast(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+}
+
+TEST(crc32, advanced4)
+{
+  const std::string str = "azertyuiopqsdfghjklmwxcvbn";
+  const uint32_t expected_result = 0xF36868CC;
+
+  uint32_t result = 0;
+
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_bitwise(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_bitwise(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_bitwise_branch(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_bitwise_branch(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_halfbyte(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_halfbyte(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+#ifdef CRC32_USE_LOOKUP_TABLE_BYTE
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte_tableless(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte_tableless(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte_tableless2(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte_tableless2(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+#endif
+
+#ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_4
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_4bytes(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_4bytes(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+#endif
+
+#ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_8bytes(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_8bytes(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_4x8bytes(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_4x8bytes(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+#endif
+
+#ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_16
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_16bytes(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_16bytes(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_16bytes_prefetch(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_16bytes_prefetch(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+#endif
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_fast(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_fast(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+}
+
+TEST(crc32, advanced5)
+{
+  const std::string str = "+-*/#~|{}()=.,[]?;:!";
+  const uint32_t expected_result = 0x98783B28;
+
+  uint32_t result = 0;
+
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_bitwise(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_bitwise(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_bitwise_branch(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_bitwise_branch(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_halfbyte(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_halfbyte(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+#ifdef CRC32_USE_LOOKUP_TABLE_BYTE
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte_tableless(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte_tableless(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte_tableless2(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_1byte_tableless2(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+#endif
+
+#ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_4
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_4bytes(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_4bytes(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+#endif
+
+#ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_8bytes(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_8bytes(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_4x8bytes(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_4x8bytes(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+#endif
+
+#ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_16
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_16bytes(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_16bytes(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_16bytes_prefetch(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_16bytes_prefetch(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+#endif
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_fast(s.data(), 1, result);
+  }
+  EXPECT_EQ(expected_result, result);
+
+  result = 0;
+  for (const char& c : str) {
+    const std::string s(1, c);
+    result = crc32::crc32_fast(s, result);
+  }
+  EXPECT_EQ(expected_result, result);
 }
 
 /*
-TEST(crc32, advanced4)
+TEST(crc32, advanced_test1)
 {
   const std::string str = "windows11";
   const uint32_t expected_result = 0xD93DD2EE;
