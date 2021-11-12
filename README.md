@@ -4,8 +4,8 @@ This is a mirror of my CRC32 library hosted at https://create.stephan-brumme.com
 
 ## Features
 
-- C++11, single file
-- CMake support
+- C++11 to C++20 support
+- CMake support (3.14 minimal)
 - The fastest algorithms need about 1 CPU cycle per byte
 - Endian-aware
 - Support for [multi-threaded computation](example/crc32_test_multithreaded.cpp)
