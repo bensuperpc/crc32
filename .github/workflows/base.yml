@@ -133,10 +133,17 @@ jobs:
         if: matrix.os == 'ubuntu'
         run: sudo apt-get install clang-tidy cppcheck -y -q
 
-      - name: Configure
+      - name: Configure linux
+        if: matrix.os == 'ubuntu'
         run: cmake --preset=ci-${{ matrix.os }}
           -D BUILD_SHARED_LIBS=${{ matrix.shared }}
           -D BENCHMARK_TEST=ON
+
+      - name: Configure macos/windows
+        if: matrix.os == 'macos' || matrix.os == 'windows'
+        run: cmake --preset=ci-${{ matrix.os }}
+          -D BUILD_SHARED_LIBS=${{ matrix.shared }}
+          -D BENCHMARK_TEST=OFF
 
       - name: Build
         run: cmake --build build --config Release -j 2
