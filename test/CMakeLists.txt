@@ -62,8 +62,9 @@ if(NOT WIN32)
   add_executable(crc32_bench source/crc32_bench.cpp)
   target_link_libraries(crc32_bench PRIVATE crc32::crc32
                                             benchmark::benchmark_main)
+  option(BENCHMARK_TEST "RUN bench test with tests" OFF)                                          
 
-  if(NOT CMAKE_BUILD_TYPE MATCHES Debug)
+  if(BENCHMARK_TEST)
     add_test(NAME crc32_bench COMMAND crc32_bench)
   elseif()
     message(STATUS "Disable crc32_bench, Performance benchmark test only run on Release/RelWithDebInfo/MinSizeRel")

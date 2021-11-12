@@ -136,6 +136,7 @@ jobs:
       - name: Configure
         run: cmake --preset=ci-${{ matrix.os }}
           -D BUILD_SHARED_LIBS=${{ matrix.shared }}
+          -D BENCHMARK_TEST=ON
 
       - name: Build
         run: cmake --build build --config Release -j 2
