@@ -30,7 +30,9 @@ jobs:
           fetch-depth: 0
 
       - name: dependencies
-        run: sudo apt install ninja-build
+        run: |
+          sudo apt -y update
+          sudo apt -y install ninja-build
 
       - name: Configure
         env:
