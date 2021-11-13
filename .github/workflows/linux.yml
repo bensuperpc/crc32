@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         cxx_compiler: [g++, clang++]
-        cc_compiler: [gcc, clang]
+        cc_compiler: [gcc]
         shared: [YES, NO]
         standard: [11, 14, 17, 20]
         build_type: [Debug, Release]
