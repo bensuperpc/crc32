@@ -38,8 +38,7 @@ jobs:
 
       - name: Build
         run: |
-          $threads = (Get-CimInstance Win32_ComputerSystem).NumberOfLogicalProcessors
-          cmake --build build --parallel $threads
+          cmake --build build --parallel 2
 
       - name: Test
         run: ctest --test-dir build --verbose --output-on-failure --parallel 2

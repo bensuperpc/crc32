@@ -15,6 +15,28 @@ docs_early_return()
 include(cmake/project-is-top-level.cmake)
 include(cmake/variables.cmake)
 
+# ---- Library variable ----
+
+option(CRC32_USE_LOOKUP_TABLE_BYTE "Enable 1 byte crc32 function" ON)
+if(CRC32_USE_LOOKUP_TABLE_BYTE)
+  add_compile_definitions(CRC32_USE_LOOKUP_TABLE_BYTE)
+endif()
+
+option(CRC32_USE_LOOKUP_TABLE_SLICING_BY_4 "Enable 4 byte crc32 function" ON)
+if(CRC32_USE_LOOKUP_TABLE_SLICING_BY_4)
+  add_compile_definitions(CRC32_USE_LOOKUP_TABLE_SLICING_BY_4)
+endif()
+
+option(CRC32_USE_LOOKUP_TABLE_SLICING_BY_8 "Enable 16 byte crc32 function" ON)
+if(CRC32_USE_LOOKUP_TABLE_SLICING_BY_8)
+  add_compile_definitions(CRC32_USE_LOOKUP_TABLE_SLICING_BY_8)
+endif()
+
+option(CRC32_USE_LOOKUP_TABLE_SLICING_BY_16 "Enable 16 byte crc32 function" ON)
+if(CRC32_USE_LOOKUP_TABLE_SLICING_BY_16)
+  add_compile_definitions(CRC32_USE_LOOKUP_TABLE_SLICING_BY_16)
+endif()
+
 # ---- Declare library ----
 
 add_library(
