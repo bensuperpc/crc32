@@ -513,19 +513,19 @@ uint32_t crc32_combine(uint32_t crcA, uint32_t crcB, size_t lengthB)
     return crcA;
 
   /// CRC32 => 32 bits
-  const uint32_t CrcBits = 32;
+  // const uint32_t CrcBits = 32; 
 
-  uint32_t odd[CrcBits];  // odd-power-of-two  zeros operator
-  uint32_t even[CrcBits];  // even-power-of-two zeros operator
+  uint32_t odd[32];  // odd-power-of-two  zeros operator
+  uint32_t even[32];  // even-power-of-two zeros operator
 
   // put operator for one zero bit in odd
   odd[0] = Polynomial;  // CRC-32 polynomial
-  for (int i = 1; i < (int)CrcBits; i++)
+  for (int i = 1; i < (int)32; i++)
     odd[i] = 1 << (i - 1);
 
   // put operator for two zero bits in even
   // same as gf2_matrix_square(even, odd);
-  for (int i = 0; i < (int)CrcBits; i++) {
+  for (int i = 0; i < (int)32; i++) {
     uint32_t vec = odd[i];
     even[i] = 0;
     for (int j = 0; vec != 0; j++, vec >>= 1)
@@ -534,7 +534,7 @@ uint32_t crc32_combine(uint32_t crcA, uint32_t crcB, size_t lengthB)
   }
   // put operator for four zero bits in odd
   // same as gf2_matrix_square(odd, even);
-  for (int i = 0; i < (int)CrcBits; i++) {
+  for (int i = 0; i < (int)32; i++) {
     uint32_t vec = even[i];
     odd[i] = 0;
     for (int j = 0; vec != 0; j++, vec >>= 1)
@@ -548,7 +548,7 @@ uint32_t crc32_combine(uint32_t crcA, uint32_t crcB, size_t lengthB)
   // apply secondLength zeros to firstCrc32
   for (; lengthB > 0; lengthB >>= 1) {
     // same as gf2_matrix_square(a, b);
-    for (int i = 0; i < (int)CrcBits; i++) {
+    for (int i = 0; i < (int)32; i++) {
       uint32_t vec = b[i];
       a[i] = 0;
       for (int j = 0; vec != 0; j++, vec >>= 1)

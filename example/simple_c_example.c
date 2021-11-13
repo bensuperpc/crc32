@@ -6,6 +6,7 @@
 //
 
 #include <stdint.h>
+#include <stdio.h>
 
 #include "crc32/crc32.h"
 
