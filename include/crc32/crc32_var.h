@@ -34,7 +34,6 @@
 
 // uint8_t, uint32_t, int32_t
 #include <stdint.h>
-#include <stdio.h>
 
 #ifndef __LITTLE_ENDIAN
 #  define __LITTLE_ENDIAN 1234

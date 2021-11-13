@@ -237,9 +237,9 @@ int main(int argc, char* argv[])
          (NumBytes / (1024 * 1024)) / duration);
 #endif
 
-  // //////////////////////////////////////////////////////////
-  // slowly increment number of threads to determine scalability
-  #ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
+// //////////////////////////////////////////////////////////
+// slowly increment number of threads to determine scalability
+#ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
   printf("run slicing-by-8 algorithm with 1 to %d threads:\n", numThreads);
 #else
   printf("run crc32_halfbyte algorithm with 1 to %d threads:\n", numThreads);
