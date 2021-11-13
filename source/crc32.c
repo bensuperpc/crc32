@@ -587,7 +587,7 @@ const uint32_t Crc32Lookup[16][256] = {
 const uint32_t Crc32Lookup[8][256] = {
 #  elif defined(CRC32_USE_LOOKUP_TABLE_SLICING_BY_4)
 const uint32_t Crc32Lookup[4][256] = {
-#  else defined(CRC32_USE_LOOKUP_TABLE_BYTE)
+#  elif defined(CRC32_USE_LOOKUP_TABLE_BYTE)
 const uint32_t Crc32Lookup[1][256] = {
 #  endif
     //// same algorithm as crc32_bitwise

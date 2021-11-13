@@ -81,7 +81,8 @@ bool testCombine(const char* data, size_t maxBytes = 1024)
     // split bytes into two blocks of lengthA and lengthB
     auto lengthB = maxBytes - lengthA;
 
-    // compute CRC of both blocks
+// compute CRC of both blocks
+#ifdef CRC32_USE_LOOKUP_TABLE_BYTE
     auto crcA = crc32::crc32_1byte(data, lengthA);
     auto crcB = crc32::crc32_1byte(data + lengthA, lengthB);
 
@@ -104,6 +105,30 @@ bool testCombine(const char* data, size_t maxBytes = 1024)
              crcCombined);
       ok = false;
     }
+#else
+    auto crcA = crc32::crc32_halfbyte(data, lengthA);
+    auto crcB = crc32::crc32_halfbyte(data + lengthA, lengthB);
+
+    // CRC of the whole block
+    auto crcAtOnce = crc32::crc32_halfbyte(data, maxBytes);
+    // CRC of both blocks in a sequential fashion
+    auto crcSequential = crc32::crc32_halfbyte(data + lengthA, lengthB, crcA);
+
+    // CRC using the new crc32_combine function
+    auto crcCombined = crc32::crc32_combine(crcA, crcB, lengthB);
+
+    // check results
+    if (crcAtOnce != crcSequential || crcAtOnce != crcCombined) {
+      printf("FAILED @ %zu: %08X %08X %08X %08X %08X\n",
+             lengthA,
+             crcA,
+             crcB,
+             crcAtOnce,
+             crcSequential,
+             crcCombined);
+      ok = false;
+    }
+#endif
   }
   return ok;
 }
@@ -132,14 +157,17 @@ int main(int argc, char* argv[])
   // number of threads: use all cores by default or set number as command-line
   // parameter
   auto numThreads = 0;
-  if (argc == 2)
+  if (argc == 2) {
     numThreads = std::stoi(argv[1]);
-  if (numThreads <= 0)
+  }
+  if (numThreads <= 0) {
     numThreads = std::thread::hardware_concurrency();
+  }
   printf("use %d threads:\n", numThreads);
 
-  // //////////////////////////////////////////////////////////
-  // one byte at once
+// //////////////////////////////////////////////////////////
+// one byte at once
+#ifdef CRC32_USE_LOOKUP_TABLE_BYTE
   start_time = cpp_clock::now();
   crc = run(crc32::crc32_1byte, data, NumBytes, numThreads);
   duration = std::chrono::duration_cast<std::chrono::duration<double>>(
@@ -150,8 +178,10 @@ int main(int argc, char* argv[])
          crc,
          duration,
          (NumBytes / (1024 * 1024)) / duration);
+#endif
 
-  // four bytes at once
+// four bytes at once
+#ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_4
   start_time = cpp_clock::now();
   crc = run(crc32::crc32_4bytes, data, NumBytes, numThreads);
   duration = std::chrono::duration_cast<std::chrono::duration<double>>(
@@ -162,8 +192,10 @@ int main(int argc, char* argv[])
          crc,
          duration,
          (NumBytes / (1024 * 1024)) / duration);
+#endif
 
-  // eight bytes at once
+// eight bytes at once
+#ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
   start_time = cpp_clock::now();
   crc = run(crc32::crc32_8bytes, data, NumBytes, numThreads);
   duration = std::chrono::duration_cast<std::chrono::duration<double>>(
@@ -175,7 +207,10 @@ int main(int argc, char* argv[])
          duration,
          (NumBytes / (1024 * 1024)) / duration);
 
-  // eight bytes at once, unrolled 4 times (=> 32 bytes per loop)
+#endif
+
+// eight bytes at once, unrolled 4 times (=> 32 bytes per loop)
+#ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
   start_time = cpp_clock::now();
   crc = run(crc32::crc32_4x8bytes, data, NumBytes, numThreads);
   duration = std::chrono::duration_cast<std::chrono::duration<double>>(
@@ -186,8 +221,10 @@ int main(int argc, char* argv[])
          crc,
          duration,
          (NumBytes / (1024 * 1024)) / duration);
+#endif
 
-  // sixteen bytes at once
+// sixteen bytes at once
+#ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_16
   start_time = cpp_clock::now();
   crc = run(crc32::crc32_16bytes, data, NumBytes, numThreads);
   duration = std::chrono::duration_cast<std::chrono::duration<double>>(
@@ -198,35 +235,61 @@ int main(int argc, char* argv[])
          crc,
          duration,
          (NumBytes / (1024 * 1024)) / duration);
+#endif
 
   // //////////////////////////////////////////////////////////
   // slowly increment number of threads to determine scalability
+  #ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
   printf("run slicing-by-8 algorithm with 1 to %d threads:\n", numThreads);
+#else
+  printf("run crc32_halfbyte algorithm with 1 to %d threads:\n", numThreads);
+#endif
+
   for (auto scaleThreads = 1; scaleThreads <= numThreads; scaleThreads++) {
     // eight bytes at once
     start_time = cpp_clock::now();
-
-    if (scaleThreads == 1)
+#ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
+    if (scaleThreads == 1) {
       crc = crc32::crc32_8bytes(data, NumBytes);  // single-threaded
-    else
+    } else {
       crc = run(
           crc32::crc32_8bytes, data, NumBytes, scaleThreads);  // multi-threaded
+    }
+#else
+    if (scaleThreads == 1) {
+      crc = crc32::crc32_halfbyte(data, NumBytes);  // single-threaded
+    } else {
+      crc = run(crc32::crc32_halfbyte,
+                data,
+                NumBytes,
+                scaleThreads);  // multi-threaded
+    }
+#endif
 
     duration = std::chrono::duration_cast<std::chrono::duration<double>>(
                    cpp_clock::now() - start_time)
                    .count();
+#ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
     printf("  8 bytes at once / %d threads: CRC=%08X, %.3fs, %.3f MB/s\n",
            scaleThreads,
            crc,
            duration,
            (NumBytes / (1024 * 1024)) / duration);
+#else
+    printf("  0.5 bytes at once / %d threads: CRC=%08X, %.3fs, %.3f MB/s\n",
+           scaleThreads,
+           crc,
+           duration,
+           (NumBytes / (1024 * 1024)) / duration);
+#endif
+
+    // //////////////////////////////////////////////////////////
+    // verify crc32_combine
+    if (!testCombine(data, 1024)) {
+      printf("ERROR in crc32_combine !!!\n");
+    }
+
+    delete[] data;
+    return 0;
   }
-
-  // //////////////////////////////////////////////////////////
-  // verify crc32_combine
-  if (!testCombine(data, 1024))
-    printf("ERROR in crc32_combine !!!\n");
-
-  delete[] data;
-  return 0;
 }
