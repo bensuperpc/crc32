@@ -5,9 +5,9 @@ include(cmake/prelude.cmake)
 project(
     crc32
     VERSION 0.1.0
-    DESCRIPTION "fast crc32"
+    DESCRIPTION "fast crc32 library"
     HOMEPAGE_URL "https://create.stephan-brumme.com/"
-    LANGUAGES CXX
+    LANGUAGES C CXX
 )
 
 docs_early_return()
@@ -20,6 +20,7 @@ include(cmake/variables.cmake)
 add_library(
     crc32_crc32
     source/crc32.cpp
+    source/crc32.c
 )
 add_library(crc32::crc32 ALIAS crc32_crc32)
 

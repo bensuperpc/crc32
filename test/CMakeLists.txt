@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 
-project(crc32Tests LANGUAGES CXX)
+project(crc32Tests LANGUAGES C CXX)
 
 include(../cmake/project-is-top-level.cmake)
 include(../cmake/windows-set-path.cmake)
