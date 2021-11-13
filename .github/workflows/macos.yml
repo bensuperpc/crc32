@@ -38,9 +38,7 @@ jobs:
             -D CMAKE_CXX_STANDARD=${{matrix.standard}} --preset=ci-macos
 
       - name: Build
-        run: |
-          threads=`sysctl -n hw.logicalcpu`
-          cmake --build build  --config ${{matrix.build_type}} --parallel $threads
+        run: cmake --build build  --config ${{matrix.build_type}} --parallel 2
 
       - name: Test
         run: ctest --test-dir build --verbose --output-on-failure --parallel 2
