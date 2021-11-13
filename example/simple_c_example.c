@@ -12,17 +12,15 @@
 
 int main()
 {
-  char str[6] = {"Linux"};
+  char str[5] = {'L', 'i', 'n', 'u', 'x'};
 
-  const uint32_t result = crc32_halfbyte(str, 6, 0);
+  const uint32_t result = crc32_halfbyte(str, 5, 0);
 
-  printf("0x%04x", result);
-  /*
-  printf("%zu\n", sz);
-
-  std::cout << "CRC32 of: " << str << " = 0x" << std::hex << result
-            << std::endl;
-            */
-
+  if (result == 0x53d0684b) {
+    printf("0x%.4X\n", result);
+  } else {
+    printf("Error: wrong CRC32 value");
+    return 1;
+  }
   return 0;
 }
