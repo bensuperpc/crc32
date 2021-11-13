@@ -4,7 +4,7 @@ This is a mirror of my CRC32 library hosted at https://create.stephan-brumme.com
 
 ## Features
 
-- C++11 to C++20 support
+- C++11 support (C++17 recommended, eg **std::string_view** ...)
 - CMake support (3.14 minimal)
 - The fastest algorithms need about 1 CPU cycle per byte
 - Endian-aware
