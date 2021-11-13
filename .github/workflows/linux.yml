@@ -17,7 +17,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        compiler: [g++, clang++]
+        cxx_compiler: [g++, clang++]
+        cc_compiler: [gcc, clang]
         shared: [YES, NO]
         standard: [11, 14, 17, 20]
         build_type: [Debug, Release]
@@ -36,7 +37,8 @@ jobs:
 
       - name: Configure
         env:
-          CXX: ${{matrix.compiler}}
+          CXX: ${{matrix.cxx_compiler}}
+          CC: ${{matrix.cc_compiler}}
         run: |
           cmake -S . -B build -D CMAKE_BUILD_TYPE=${{matrix.build_type}} \
                 -D CMAKE_CXX_STANDARD=${{matrix.standard}} -G Ninja \
