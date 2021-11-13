@@ -939,7 +939,7 @@ TEST(crc32, advanced1)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
-    result = crc32_16bytes_prefetch(s.data(), 1, result);
+    result = crc32_16bytes_prefetch(s.data(), 1, result, 256);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -1225,7 +1225,7 @@ TEST(crc32, advanced2)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
-    result = crc32_16bytes_prefetch(s.data(), 1, result);
+    result = crc32_16bytes_prefetch(s.data(), 1, result, 256);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -1511,7 +1511,7 @@ TEST(crc32, advanced3)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
-    result = crc32_16bytes_prefetch(s.data(), 1, result);
+    result = crc32_16bytes_prefetch(s.data(), 1, result, 256);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -1797,7 +1797,7 @@ TEST(crc32, advanced4)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
-    result = crc32_16bytes_prefetch(s.data(), 1, result);
+    result = crc32_16bytes_prefetch(s.data(), 1, result, 256);
   }
   EXPECT_EQ(expected_result, result);
 
@@ -2083,7 +2083,7 @@ TEST(crc32, advanced5)
   result = 0;
   for (const char& c : str) {
     const std::string s(1, c);
-    result = crc32_16bytes_prefetch(s.data(), 1, result);
+    result = crc32_16bytes_prefetch(s.data(), 1, result, 256);
   }
   EXPECT_EQ(expected_result, result);
 
