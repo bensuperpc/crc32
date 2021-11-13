@@ -119,8 +119,8 @@ jobs:
             }
 
           # ManyLinux images
-          - { image_name: manylinux1-x64, cmake_arg: "-DCMAKE_CXX_STANDARD=14" }
-          - { image_name: manylinux1-x86, cmake_arg: "-DCMAKE_CXX_STANDARD=14" }
+          - { image_name: manylinux1-x64, cmake_arg: "-DCMAKE_CXX_STANDARD=14 -D CMAKE_C_STANDARD=99" }
+          - { image_name: manylinux1-x86, cmake_arg: "-DCMAKE_CXX_STANDARD=14 -D CMAKE_C_STANDARD=99" }
           - {
               image_name: manylinux2010-x86,
               cmake_arg: "-DCMAKE_CXX_STANDARD=17",
