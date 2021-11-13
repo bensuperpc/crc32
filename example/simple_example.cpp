@@ -10,7 +10,7 @@
 
 #include "crc32/crc32.hpp"
 
-auto main(int argc, char* argv[]) -> int
+auto main() -> int
 {
   const std::string str1 = "Linux";
   const auto result1 =

@@ -43,6 +43,7 @@ add_library(
     crc32_crc32
     source/crc32.cpp
     source/crc32.c
+    source/crc32_var.c
 )
 add_library(crc32::crc32 ALIAS crc32_crc32)
 

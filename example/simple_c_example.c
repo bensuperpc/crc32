@@ -10,7 +10,7 @@
 
 #include "crc32/crc32.h"
 
-int main(int argc, char* argv[])
+int main()
 {
   char str[6] = {"Linux"};
 

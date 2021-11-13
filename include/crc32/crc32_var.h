@@ -1,5 +1,5 @@
 // //////////////////////////////////////////////////////////
-// crc32.h
+// crc32_var.h
 // Copyright (c) 2011-2021 Stephan Brumme. All rights reserved.
 // Slicing-by-16 contributed by Bulat Ziganshin
 // Tableless bytewise CRC contributed by Hagai Gold
@@ -11,10 +11,12 @@
 
 // if running on an embedded system, you might consider shrinking the
 // big Crc32Lookup table by undefining these lines:
-#define CRC32_USE_LOOKUP_TABLE_BYTE
-#define CRC32_USE_LOOKUP_TABLE_SLICING_BY_4
-#define CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
-#define CRC32_USE_LOOKUP_TABLE_SLICING_BY_16
+
+// #define CRC32_USE_LOOKUP_TABLE_BYTE
+// #define CRC32_USE_LOOKUP_TABLE_SLICING_BY_4
+// #define CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
+// #define CRC32_USE_LOOKUP_TABLE_SLICING_BY_16
+
 // - crc32_bitwise  doesn't need it at all
 // - crc32_bitwise_branch  doesn't need it at all
 // - crc32_halfbyte has its own small lookup table
@@ -29,6 +31,10 @@
 
 // Needed, add CRC32_EXPORT before each function
 #include "crc32/crc32_export.hpp"
+
+// uint8_t, uint32_t, int32_t
+#include <stdint.h>
+#include <stdio.h>
 
 #ifndef __LITTLE_ENDIAN
 #  define __LITTLE_ENDIAN 1234
@@ -79,9 +85,6 @@
 #  endif
 #endif
 
-/// zlib's CRC32 polynomial
-extern const uint32_t Polynomial;
-
 #if __BYTE_ORDER == __BIG_ENDIAN
 /// swap endianness
 static inline uint32_t swap(uint32_t x)
@@ -97,6 +100,9 @@ static inline uint32_t swap(uint32_t x)
 
 // //////////////////////////////////////////////////////////
 // constants
+
+/// zlib's CRC32 polynomial
+extern const uint32_t Polynomial;
 
 #ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_16
 extern const uint32_t Crc32Lookup[16][256];

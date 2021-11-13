@@ -5,6 +5,7 @@
 // Tableless bytewise CRC contributed by Hagai Gold
 // see http://create.stephan-brumme.com/disclaimer.html
 //
+#pragma once
 
 #ifndef CRC32_H_INCLUDED
 #define CRC32_H_INCLUDED
