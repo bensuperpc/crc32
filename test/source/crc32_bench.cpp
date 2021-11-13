@@ -260,7 +260,7 @@ BENCHMARK(crc32_1byte_bench)
     ->RangeMultiplier(100)
     ->Range(1, 1000000000);
 
-static void crc32_1byte_c_tableless_bench(benchmark::State& state)
+static void crc32_1byte_tableless_c_bench(benchmark::State& state)
 {
   // Code inside this loop is measured repeatedly
   auto size = state.range(0);
