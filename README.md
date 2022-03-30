@@ -2,7 +2,7 @@
 
 Fast CRC32 library, based on the work of Stephan Brumme (https://create.stephan-brumme.com/crc32/).
 
-[![Continuous Integration](https://github.com/bensuperpc/crc32/actions/workflows/base.yml/badge.svg)](https://github.com/bensuperpc/crc32/actions/workflows/base.yml) [![Dockcross CI](https://github.com/bensuperpc/crc32/actions/workflows/dockcross.yml/badge.svg)](https://github.com/bensuperpc/crc32/actions/workflows/dockcross.yml)
+[![Continuous Integration](https://github.com/bensuperpc/crc32/actions/workflows/ci.yml/badge.svg)](https://github.com/bensuperpc/crc32/actions/workflows/base.yml) [![Dockcross CI](https://github.com/bensuperpc/crc32/actions/workflows/dockcross.yml/badge.svg)](https://github.com/bensuperpc/crc32/actions/workflows/dockcross.yml)
 
 [![linux](https://github.com/bensuperpc/crc32/actions/workflows/linux.yml/badge.svg)](https://github.com/bensuperpc/crc32/actions/workflows/linux.yml) [![windows](https://github.com/bensuperpc/crc32/actions/workflows/windows.yml/badge.svg)](https://github.com/bensuperpc/crc32/actions/workflows/windows.yml) [![macos](https://github.com/bensuperpc/crc32/actions/workflows/macos.yml/badge.svg)](https://github.com/bensuperpc/crc32/actions/workflows/macos.yml)
 
@@ -16,7 +16,7 @@ Fast CRC32 library, based on the work of Stephan Brumme (https://create.stephan-
 - Multi OS support: Linux 32/64, MacOS, Windows 32/64, Android 32/64
 - Cross-plateform support: AMD64, I386, ARMv8, ARMv7, ARMv6, ARMv5, RISC-V 32/64, PPC64le, Mips, m68k..
 - Runs even on [Arduino](Crc32Best.ino), Raspberry Pi, etc.
-- Quite long posting about it on https://create.stephan-brumme.com/crc32/, describing each implemented algorithm in detail
+- More info https://create.stephan-brumme.com/crc32/
 
 ## Algorithms
 
