@@ -4,7 +4,7 @@ include(cmake/prelude.cmake)
 
 project(
     crc32
-    VERSION 0.1.0
+    VERSION 1.0.0
     DESCRIPTION "fast crc32 library"
     HOMEPAGE_URL "https://create.stephan-brumme.com/"
     LANGUAGES C CXX
