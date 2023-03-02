@@ -110,58 +110,58 @@ CRC32_EXPORT uint32_t crc32_16bytes_prefetch(const void* data,
 // crc32_fast selects the fastest algorithm depending on flags
 // (CRC32_USE_LOOKUP_...)
 /// compute CRC32 using the fastest algorithm for large datasets on modern CPUs
-CRC32_EXPORT uint32_t crc32_fast(std::string_view data,
+CRC32_EXPORT uint32_t crc32_fast(const std::string_view data,
                                  const uint32_t previousCrc32 = 0);
 
 /// compute CRC32 (bitwise algorithm)
-CRC32_EXPORT uint32_t crc32_bitwise(std::string_view data,
+CRC32_EXPORT uint32_t crc32_bitwise(const std::string_view data,
                                     const uint32_t previousCrc32 = 0);
 
 /// compute CRC32 (bitwise algorithm)
-CRC32_EXPORT uint32_t crc32_bitwise_branch(std::string_view data,
+CRC32_EXPORT uint32_t crc32_bitwise_branch(const std::string_view data,
                                            const uint32_t previousCrc32 = 0);
 
 /// compute CRC32 (half-byte algorithm)
-CRC32_EXPORT uint32_t crc32_halfbyte(std::string_view data,
+CRC32_EXPORT uint32_t crc32_halfbyte(const std::string_view data,
                                      const uint32_t previousCrc32 = 0);
 
 #  ifdef CRC32_USE_LOOKUP_TABLE_BYTE
 /// compute CRC32 (standard algorithm)
-CRC32_EXPORT uint32_t crc32_1byte(std::string_view data,
+CRC32_EXPORT uint32_t crc32_1byte(const std::string_view data,
                                   const uint32_t previousCrc32 = 0);
 #  endif
 
 /// compute CRC32 (byte algorithm) without lookup tables
-CRC32_EXPORT uint32_t crc32_1byte_tableless(std::string_view data,
+CRC32_EXPORT uint32_t crc32_1byte_tableless(const std::string_view data,
                                             const uint32_t previousCrc32 = 0);
 
 /// compute CRC32 (byte algorithm) without lookup tables
-CRC32_EXPORT uint32_t crc32_1byte_tableless2(std::string_view data,
+CRC32_EXPORT uint32_t crc32_1byte_tableless2(const std::string_view data,
                                              const uint32_t previousCrc32 = 0);
 
 #  ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_4
 /// compute CRC32 (Slicing-by-4 algorithm)
-CRC32_EXPORT uint32_t crc32_4bytes(std::string_view data,
+CRC32_EXPORT uint32_t crc32_4bytes(const std::string_view data,
                                    const uint32_t previousCrc32 = 0);
 #  endif
 
 #  ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
 /// compute CRC32 (Slicing-by-8 algorithm)
-CRC32_EXPORT uint32_t crc32_8bytes(std::string_view data,
+CRC32_EXPORT uint32_t crc32_8bytes(const std::string_view data,
                                    const uint32_t previousCrc32 = 0);
 
 /// compute CRC32 (Slicing-by-8 algorithm), unroll inner loop 4 times
-CRC32_EXPORT uint32_t crc32_4x8bytes(std::string_view data,
+CRC32_EXPORT uint32_t crc32_4x8bytes(const std::string_view data,
                                      const uint32_t previousCrc32 = 0);
 #  endif
 
 #  ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_16
 /// compute CRC32 (Slicing-by-16 algorithm)
-CRC32_EXPORT uint32_t crc32_16bytes(std::string_view data,
+CRC32_EXPORT uint32_t crc32_16bytes(const std::string_view data,
                                     const uint32_t previousCrc32 = 0);
 
 /// compute CRC32 (Slicing-by-16 algorithm, prefetch upcoming data blocks)
-CRC32_EXPORT uint32_t crc32_16bytes_prefetch(std::string_view data,
+CRC32_EXPORT uint32_t crc32_16bytes_prefetch(const std::string_view data,
                                              const uint32_t previousCrc32 = 0,
                                              size_t prefetchAhead = 256);
 #  endif

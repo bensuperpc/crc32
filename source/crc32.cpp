@@ -143,7 +143,7 @@ uint32_t crc32::crc32_combine(uint32_t crcA, uint32_t crcB, size_t lengthB)
 
 /// compute CRC32 (bitwise algorithm)
 #if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
-std::uint32_t crc32::crc32_bitwise(std::string_view data,
+std::uint32_t crc32::crc32_bitwise(const std::string_view data,
                                    const uint32_t previousCrc32)
 #else
 std::uint32_t crc32::crc32_bitwise(const std::string& data,
@@ -168,7 +168,7 @@ std::uint32_t crc32::crc32_bitwise(const std::string& data,
 
 /// compute CRC32 (bitwise algorithm with branching)
 #if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
-std::uint32_t crc32::crc32_bitwise_branch(std::string_view data,
+std::uint32_t crc32::crc32_bitwise_branch(const std::string_view data,
                                           const uint32_t previousCrc32)
 #else
 std::uint32_t crc32::crc32_bitwise_branch(const std::string& data,
@@ -197,7 +197,7 @@ std::uint32_t crc32::crc32_bitwise_branch(const std::string& data,
 
 /// compute CRC32 (half-byte algorithm)
 #if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
-std::uint32_t crc32::crc32_halfbyte(std::string_view data,
+std::uint32_t crc32::crc32_halfbyte(const std::string_view data,
                                     const uint32_t previousCrc32)
 #else
 std::uint32_t crc32::crc32_halfbyte(const std::string& data,
@@ -239,7 +239,7 @@ std::uint32_t crc32::crc32_halfbyte(const std::string& data,
 #ifdef CRC32_USE_LOOKUP_TABLE_BYTE
 /// compute CRC32 (standard algorithm)
 #  if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
-std::uint32_t crc32::crc32_1byte(std::string_view data,
+std::uint32_t crc32::crc32_1byte(const std::string_view data,
                                  const uint32_t previousCrc32)
 #  else
 std::uint32_t crc32::crc32_1byte(const std::string& data,
@@ -259,7 +259,7 @@ std::uint32_t crc32::crc32_1byte(const std::string& data,
 
 /// compute CRC32 (byte algorithm) without lookup tables
 #if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
-std::uint32_t crc32::crc32_1byte_tableless(std::string_view data,
+std::uint32_t crc32::crc32_1byte_tableless(const std::string_view data,
                                            const uint32_t previousCrc32)
 #else
 std::uint32_t crc32::crc32_1byte_tableless(const std::string& data,
@@ -314,7 +314,7 @@ std::uint32_t crc32::crc32_1byte_tableless(const std::string& data,
 
 /// compute CRC32 (byte algorithm) without lookup tables
 #if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
-std::uint32_t crc32::crc32_1byte_tableless2(std::string_view data,
+std::uint32_t crc32::crc32_1byte_tableless2(const std::string_view data,
                                             const uint32_t previousCrc32)
 #else
 std::uint32_t crc32::crc32_1byte_tableless2(const std::string& data,
@@ -350,7 +350,7 @@ std::uint32_t crc32::crc32_1byte_tableless2(const std::string& data,
 #ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_4
 /// compute CRC32 (Slicing-by-4 algorithm)
 #  if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
-std::uint32_t crc32::crc32_4bytes(std::string_view data,
+std::uint32_t crc32::crc32_4bytes(const std::string_view data,
                                   const uint32_t previousCrc32)
 #  else
 std::uint32_t crc32::crc32_4bytes(const std::string& data,
@@ -393,7 +393,7 @@ std::uint32_t crc32::crc32_4bytes(const std::string& data,
 #ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_8
 /// compute CRC32 (Slicing-by-8 algorithm)
 #  if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
-std::uint32_t crc32::crc32_8bytes(std::string_view data,
+std::uint32_t crc32::crc32_8bytes(const std::string_view data,
                                   const uint32_t previousCrc32)
 #  else
 std::uint32_t crc32::crc32_8bytes(const std::string& data,
@@ -444,7 +444,7 @@ std::uint32_t crc32::crc32_8bytes(const std::string& data,
 
 /// compute CRC32 (Slicing-by-8 algorithm), unroll inner loop 4 times
 #  if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
-std::uint32_t crc32::crc32_4x8bytes(std::string_view data,
+std::uint32_t crc32::crc32_4x8bytes(const std::string_view data,
                                     const uint32_t previousCrc32)
 #  else
 std::uint32_t crc32::crc32_4x8bytes(const std::string& data,
@@ -504,7 +504,7 @@ std::uint32_t crc32::crc32_4x8bytes(const std::string& data,
 #ifdef CRC32_USE_LOOKUP_TABLE_SLICING_BY_16
 /// compute CRC32 (Slicing-by-16 algorithm)
 #  if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
-std::uint32_t crc32::crc32_16bytes(std::string_view data,
+std::uint32_t crc32::crc32_16bytes(const std::string_view data,
                                    const uint32_t previousCrc32)
 #  else
 std::uint32_t crc32::crc32_16bytes(const std::string& data,
@@ -582,7 +582,7 @@ std::uint32_t crc32::crc32_16bytes(const std::string& data,
 
 /// compute CRC32 (Slicing-by-16 algorithm, prefetch upcoming data blocks)
 #  if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
-std::uint32_t crc32::crc32_16bytes_prefetch(std::string_view data,
+std::uint32_t crc32::crc32_16bytes_prefetch(const std::string_view data,
                                             const uint32_t previousCrc32,
                                             size_t prefetchAhead)
 #  else
@@ -667,7 +667,7 @@ std::uint32_t crc32::crc32_16bytes_prefetch(const std::string& data,
 
 /// compute CRC32 using the fastest algorithm for large datasets on modern CPUs
 #if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
-std::uint32_t crc32::crc32_fast(std::string_view data,
+std::uint32_t crc32::crc32_fast(const std::string_view data,
                                 const uint32_t previousCrc32)
 #else
 std::uint32_t crc32::crc32_fast(const std::string& data,
